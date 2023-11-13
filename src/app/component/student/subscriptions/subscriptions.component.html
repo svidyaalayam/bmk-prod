@@ -1,0 +1,51 @@
+<div>
+
+    <table class="table table-hover" *ngIf="sClassesEnrolled.length > 0" >
+      <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Enrolled On</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sClassEnrolled of sClassesEnrolled; let i = index" (click)="onClassDataSelected(i)" [class.table-primary]="selectedClassIndex == i">
+          <td>{{ getCourseDetailsForId(sClassEnrolled.courseid) }}</td>
+          <td>{{ getDateTimeForTimeStamp(sClassEnrolled.enroldate) }}</td>
+          <td>{{ sClassEnrolled.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <input  type="checkbox" id="showOtherEnrollments" [(ngModel)]="bShowOtherClasses" >
+    <label for="showOtherEnrollments" style="padding-left: 5px; ">See all our Balamukundam classes </label> 
+  
+    <div *ngIf="bShowOtherClasses">
+
+        <h3>Currently, our Balamukundam school, provides the following courses. Kindly specify the course you are interested in enrolling.</h3>
+
+        <div *ngFor="let sc of sClassesOffered">
+            <div class="card mb-3" >
+            <div class="card-body" >
+                <div class="row" >
+                    <div class="col-md-9">
+                        <h3 class="card-title">{{sc.title}}</h3>
+                        <p class="card-text">{{sc.description}}</p>
+                    </div>
+                    <div class="col-md-3" >
+                        <img class="card-img-right" style="height: 120px; width: 120px;" src={{sc.src1}} alt="Card image cap" *ngIf="sc.src2">
+                        <img class="card-img-right" style="height: auto; width: 180px" src={{sc.src1}} alt="Card image cap" *ngIf="!sc.src2">
+                        
+                        <img class="card-img-right" style="width: 80px;" src={{sc.src2}} alt="Card image cap" *ngIf="sc.src2">
+            
+                    </div>
+                </div>
+                
+                <div class="input-group mb-3" style="margin-top: 20px;">
+                <input  type="checkbox" id="enrolled" [(ngModel)]="sc.enrolled" >
+                <label for="enrolled" style="padding-left: 5px; "> Enrol</label>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

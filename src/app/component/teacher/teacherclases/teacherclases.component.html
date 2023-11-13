@@ -1,0 +1,84 @@
+<h3>{{userClassText}}</h3>
+<table class="table table-hover" *ngIf="usersClassData.length > 0" >
+  <thead>
+    <tr>
+      <th>Class Name</th>
+      <th>Description</th>
+      <th>Timings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bmkClass of usersClassData; let i = index" (click)="onClassDataSelected(i)" [class.table-primary]="selectedClassIndex == i">
+      <td>{{ bmkClass.name }}</td>
+      <td>{{ bmkClass.description }}</td>
+      <td>{{ bmkClass.timings }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="w3-col" *ngIf="usersClassData.length > 0">
+    <div class="card card-body">
+        
+      <h2>Class Information</h2>
+
+      <div class="container">
+        <h3>Class Name:</h3>
+        <p>{{usersClassData[selectedClassIndex].name}}</p>
+      </div>
+
+      <div class="container" *ngFor="let classTeach of selectedClassTeachersData; let i = index">
+        <h3>Class Teacher {{i+1}}:</h3>
+        <p>{{classTeach.teacher.name}} {{classTeach.teacher.surname}}</p>
+      </div>
+      
+
+      <div class="container">
+        <h3>Description:</h3>
+        <p>{{usersClassData[selectedClassIndex].description}}</p>
+      </div>
+
+      <div class="container">
+        <h3>Class Timings:</h3>
+        <p>{{usersClassData[selectedClassIndex].timings}}</p>
+      </div>
+
+      <div class="container">
+        <h3>Number of Students in class:</h3>
+        <p>{{selectedClassStudentsData.length}}</p>
+      </div>
+
+      <table class="table table-hover" *ngIf="selectedClassStudentsData.length > 0" >
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Photo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let selectedClassStudentData of selectedClassStudentsData; let i = index" (click)="onStudentDataSelected(i)" [class.table-primary]="selectedStudentIndex == i">
+            <td>{{ selectedClassStudentData.student.name }} {{ selectedClassStudentData.student.surname }}</td>
+            <td>{{ selectedClassStudentData.student.loginid }}</td>
+            <td><img src={{selectedClassStudentData.student.photourl}} alt="Profile picture" style="width:100px"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container">
+        <h3>Additional Notes:</h3>
+        <div class="multiline-text">
+            {{usersClassData[selectedClassIndex].notes}}
+        </div>
+      </div>
+      
+  
+
+      <div class="container">
+        <h3>Zoom link:</h3>
+        <a href="{{usersClassData[selectedClassIndex].zoom}}" target="myWindow">{{usersClassData[selectedClassIndex].zoom}}</a>
+      </div>
+
+      
+
+    </div>
+</div>

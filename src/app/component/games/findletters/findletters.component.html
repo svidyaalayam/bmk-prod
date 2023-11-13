@@ -1,0 +1,117 @@
+<div class="w3-bar w3-light-grey w3-row div-telugu30" >
+    
+    <button class="w3-bar-item w3-button btnLesson w3-col l6 m6 s6" (click)="setGame(1)">Game-1 గుర్తించండి  (Identify)</button>
+    <button class="w3-bar-item w3-button btnLesson w3-col l6 m6 s6" (click)="setGame(2)">Game-2 క్రమపరచండి (Order)</button>
+
+</div>
+
+<div class="div-telugu30" style="background-color: lightblue">
+
+        <label for="editMode">Select:</label>
+        <select id="editMode" (change)="applySelectedLesson()">
+        <option *ngFor="let titleName of titleNames; index as i" value={{i}} >{{titleName}}</option>        
+        </select>    
+        <label style="padding-left:50px">అ.. ఆ... ల ఆట</label>   
+
+</div>
+<br>
+<div *ngIf="gameNbr==1">
+
+
+    <div class="w3-bar w3-light-grey w3-row" >
+        <button class="w3-bar-item w3-button btnLesson w3-col l1 m1 s1" (click)="setLanguage(1)" [disabled]="curNbr >= 0" [ngClass]="iLanguageOption==1 ? 'btnLangSel': 'btnLangNotSel' ">Telugu</button>
+        <button class="w3-bar-item w3-button btnLesson w3-col l1 m1 s1" (click)="setLanguage(2)" [disabled]="curNbr >= 0" [ngClass]="iLanguageOption==2 ? 'btnLangSel': 'btnLangNotSel' ">Sanskrit</button>
+        <button class="w3-bar-item w3-button btnLesson w3-col l1 m1 s1" id="start" (click)="startGameButton()"  [disabled]="curNbr >= 0" style="font-size: 20px; line-height: 1.5; margin:10px">Start</button>
+        <button class="w3-bar-item w3-button btnLesson w3-col l1 m1 s1" id="stop" (click)="finishGame()" style="font-size: 20px; line-height: 1.5; margin:10px">Finish </button>
+    
+        <label for="editTranslitOption" style="padding-left: 5px;">Select Otion:</label>
+        <select id="editTranslitOption" (change)="applyUserOptions()" [disabled]="curNbr >= 0">
+            <option *ngFor="let i of ['Transliterature - Native', 'Native - Transliterature']" value={{i}} [selected]="i === 'Transliterature - Native'">{{i}}</option>        
+        </select>
+        <br>
+        <br>
+        
+        <input type="checkbox" id="audioOff" (change)="audioOn = !audioOn">
+        <label for="audioOff" style="padding-left: 5px;"> :  Audio On / Off</label>
+        
+
+     
+    </div>
+
+
+    <div *ngIf="curNbr>=0" >
+
+        
+
+        <div  class="div-telugu30">
+            <button (click)="soundFont()" >చదివి వినిపించు (Read the alphabet)</button>
+        </div>
+        
+
+        <br>
+        <div class="div-telugu100">  
+
+        <button style="margin:10px" [disabled]="gamefinish"> {{iTranslitOption==1 ? listOfTranslits[curNbr] : listOfWords[curNbr] }} </button>
+        <label style="margin:10px"> : </label>
+   
+        <button *ngFor="let qnbr of qstnNbrs; index as i" (click)="testAnswer(i)" style="min-width: 100px" [disabled]="gamefinish">{{iTranslitOption==1 ? listOfWords[qnbr] : listOfTranslits[qnbr]}}</button>        
+        </div>
+        <br>  
+        
+        <div class="div-telugu30">
+            <label>ప్రశ్న (Question) {{nbrsUsed.length}} of {{maxNbr}}</label>
+        </div>
+
+        <p>Time taken : {{timeLeft}} Seconds </p>
+
+    </div>
+
+    <div *ngIf="wrongAnswers>0 || rightAnswers >0" class="div-telugu30">
+        <label style="color:red; padding-right:50px">తప్పులు (Wrong):{{wrongAnswers}}</label>
+        <label style="color:green">ఒప్పులు (Right):{{rightAnswers}}</label>
+        <br>
+        <div *ngIf="nbrsUsed.length == maxNbr">
+            <label > {{listOfWords[0]}} - {{listOfWords[maxNbr-1]}} Game-1 ఆట అయిపోయింది (Game Finish)</label>
+            <br>
+            <label *ngIf="wrongAnswers == 0" style="color:green"> చాలా బాగా చేసేవు (Excellent Well Done!!)</label>
+        </div>
+        
+    </div>    
+
+</div>
+
+<div *ngIf="gameNbr==2">
+
+
+    <div class="div-telugu30">
+        <ng-container *ngFor="let lword of listOfWords; index as i">
+            <button *ngIf="game2Ansers > i" >{{listOfWords[i]}}</button>
+        </ng-container>
+        
+
+        <br>
+        <br>
+
+        <button *ngFor="let qnbr of nbrsForGame2; index as i" (click)="testAnswerGame2(i)" [style.background-color]= " (game2Ansers > qnbr)? 'green':''  ">{{listOfWords[qnbr]}}</button>
+
+        <p>Time taken : {{timeLeft}} Seconds </p>
+        
+    </div>
+
+    <div *ngIf="wrongAnswers>0 || rightAnswers >0" class="div-telugu30">
+        <label style="color:red; padding-right:50px">తప్పులు (Wrong):{{wrongAnswers}}</label>
+        <label style="color:green">ఒప్పులు (Right):{{rightAnswers}}</label>
+        <br>
+        <div *ngIf="game2Ansers == maxNbr">
+            <label > {{listOfWords[0]}} - {{listOfWords[maxNbr-1]}} Game-2 ఆట అయిపోయింది (Game Finish)</label>
+            <br>
+            <label *ngIf="wrongAnswers == 0" style="color:green"> చాలా బాగా చేసేవు (Excellent Well Done!!)</label>
+
+            <button (click)="applySelectedLesson()">PlayAgain </button>
+        </div>
+    </div>    
+
+
+</div>
+
+

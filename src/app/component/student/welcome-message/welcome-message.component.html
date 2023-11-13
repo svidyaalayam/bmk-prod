@@ -1,0 +1,16 @@
+<div class="welcome-message" [@fadeIn]>
+    <h2>Welcome {{dataFromParent.name}} {{dataFromParent.surname}} !</h2>
+    <h3>{{dataFromParent.loginid}}</h3>
+    <div *ngIf="dataFromParent.sMessages.length==0">
+        <p>Get ready for an exciting and enriching learning experience in our Balamukundam. </p>
+        <p>We have a lot of amazing activities and events planned just for you.</p>
+    </div>
+    
+    <div *ngFor="let msg of dataFromParent.sMessages">
+        <p class="normal-message" *ngIf="!msg.warn">{{msg.msg}}</p>
+
+        <div class="warning-message" *ngIf="msg.warn">
+            {{msg.msg}}
+        </div>
+    </div>
+</div>

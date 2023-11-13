@@ -1,0 +1,255 @@
+<h2>Class Management</h2>
+<h3>Create, Duplicate Delete Classes - Update Classes Details - Assign Teachers and Students</h3>
+
+
+<div class="mb-3">
+  <select class="form-select" [(ngModel)]="selectedCourseId" (change)="onCourceSelectionChange()">
+    <option *ngFor="let bmkCourse of bmkCourses" [value]="bmkCourse.id">{{bmkCourse.title}}</option>
+  </select>
+</div>
+
+<div *ngIf="showClasses">
+      
+  <div class="mb-3">
+    <select class="form-select" [(ngModel)]="selectedId" (change)="onDataSelected()">
+      <option *ngFor="let bmkClass of bmkClasses; let i = index" [value]="i">{{bmkClass.name}} ( {{ bmkClass.description }} ) {{ bmkClass.timings }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedId>0">
+
+    <h2>Teachers</h2>
+      <div class="input-group mb-3">
+      <input  type="checkbox" id="closeTeachers" [(ngModel)]="showTeachersToAdd" >
+      <label for="closeTeachers" style="padding-left: 5px; "> Add/Remove teachers [ {{getTeacherText()}} ]</label>  
+      </div>  
+
+
+      <div class="form-container" *ngIf="showTeachersToAdd">
+        <div class="mb-3 row align-items-center">
+          <div class="col-md-4">
+            <select class="form-select me-1" [(ngModel)]="selectedTeacherID" (change)="onTeacherSelectionChangeToAddUser()">
+              <option *ngFor="let bmkTeacher of bmkTeachers" [value]="bmkTeacher.loginid">{{bmkTeacher.name}} {{bmkTeacher.surname}}</option>
+            </select>
+          </div>
+          
+          <div class="col-md-8">
+            <button type="button" class="btn btn-outline-primary me-1" *ngIf="selectedTeacherID !== '' && !IsTeacherAdded()" (click)="onAddTeacher()">Add To Class</button>
+            <button type="button" class="btn btn-outline-primary me-1" *ngIf="selectedTeacherID !== '' && IsTeacherAdded()" (click)="onRemoveTeacher()">Remove from Class</button>
+          </div>         
+
+        </div>
+      </div>
+
+      <h2>Students</h2>
+
+      <div class="input-group mb-3">
+      <input  type="checkbox" id="closeStudents" [(ngModel)]="showStudentsToAdd" >
+      <label for="closeStudents" style="padding-left: 5px; "> Add/Remove students</label>  
+      </div>  
+
+
+      <div class="form-container" *ngIf="showStudentsToAdd">
+
+        <div class="container">
+          <h3>Number of Students in class:</h3>
+          <p>{{classStudents.length}}</p>
+        </div>
+  
+        <table class="table table-hover" *ngIf="classStudents.length > 0" >
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Email</th>
+              <th>Photo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let classStudent of classStudents" (click)="selectedStudentID = classStudent.student.loginid; showRemoveStudentButton=false" [class.table-primary]="classStudent.student.loginid === selectedStudentID">
+              <td>{{ classStudent.student.name }} {{ classStudent.student.surname }}</td>
+              <td>{{ classStudent.student.loginid }}</td>
+              <td><img src={{classStudent.student.photourl}} alt="Profile picture" style="width:100px"></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+
+        <div class="mb-3 row align-items-center">
+          <div class="col-md-4">
+            <select class="form-select me-1" [(ngModel)]="selectedStudentID" (change)="onStudentSelectionChangeToAddUser()">
+              <option *ngFor="let bmkStudent of bmkStudents" [value]="bmkStudent.loginid">{{bmkStudent.name}} {{bmkStudent.surname}} [{{bmkStudent.loginid}}]</option>
+            </select>
+          </div>
+          
+          <div class="col-md-8">
+            <div class="input-group mb-3" *ngIf="selectedStudentID !== '' && IsStudentAdded()">
+              <input  type="checkbox" id="closeStudents" [(ngModel)]="showRemoveStudentButton" >
+              <label for="closeStudents" style="padding-left: 5px; "> Remove this student</label>  
+            </div> 
+            <button type="button" class="btn btn-outline-primary me-1" *ngIf="selectedStudentID !== '' && !IsStudentAdded()" (click)="onAddStudent()">Add To Class</button>
+            <button type="button" class="btn btn-outline-primary me-1" *ngIf="selectedStudentID !== '' && IsStudentAdded() && showRemoveStudentButton" (click)="onRemoveStudent()">Remove from Class</button>
+          </div>         
+
+        </div>
+      </div>
+
+      <h2>Schedules</h2>
+
+      <div class="input-group mb-3">
+      <input  type="checkbox" id="closeStudents" [(ngModel)]="showSchedules" >
+      <label for="closeStudents" style="padding-left: 5px; "> Add/Remove Schedules</label>  
+      </div>  
+
+      <div class="form-container" *ngIf="showSchedules">
+
+        <table class="table table-hover" *ngIf="selectedClassSchedules.length > 0" >
+          <thead>
+            <tr>
+              <th>Sl. No.</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+    
+            <tr *ngFor="let selectedClassSchedule of selectedClassSchedules; let i = index" (click)="selectedDate = selectedClassSchedule.scheduledate" [class.table-primary]="selectedClassSchedule.classid === selectedDate">
+              <td>{{i+1}}</td>
+              <td>{{ formatDateInternational(selectedClassSchedule.scheduledate) }}</td>              
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="container">
+          <h3>Schedules For Class:</h3>
+          <p>{{selectedClassSchedules.length}}</p>
+        </div>
+
+        <div class="mb-3">
+          <label for="dos" class="form-label">Schedule Date:</label>
+          <input type="date" class="form-control" name="dos" value = "selectedDate" [(ngModel)]="selectedDate" required>                          
+        </div>
+        <button type="button" class="btn btn-outline-primary me-1" *ngIf="selectedDate !== ''" (click)="onAddSchedule()">Schedule a Class</button>
+          
+
+        <div class="input-group mb-3">
+          <input  type="checkbox" id="closeStudents" [(ngModel)]="copySchedules" >
+          <label for="closeStudents" style="padding-left: 5px; "> Copy Schedules</label>  
+          </div>  
+        <div class="form-container" *ngIf="copySchedules">
+
+        <div class="mb-3">
+          <select class="form-select" [(ngModel)]="copyingId">
+            <option *ngFor="let bmkClass of bmkClasses; let i = index" [value]="i">{{bmkClass.name}} ( {{ bmkClass.description }} ) {{ bmkClass.timings }}</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-outline-primary me-1" *ngIf="copyingId >= 0" (click)="onCopySchedule()">Copy Schedules</button>
+        
+
+      </div>
+
+
+      
+
+
+  
+    <div class="mb-3">
+      <label style="display: block;">Zoom meeting link:</label>
+      <a style="display: block;" href={{selectedClass.zoom}} target="_blank">{{selectedClass.zoom}}</a>
+      <textarea class="form-control" [(ngModel)]="selectedClass.notes" rows="4" readonly></textarea>      
+    </div>
+
+
+  </div>
+
+
+
+
+  
+  
+
+  <table class="table table-hover" *ngIf="false">
+    <thead>
+      <tr>
+        <th (click)="sortBy('name')">Class Name</th>
+        <th (click)="sortBy('description')">Description</th>
+        <th (click)="sortBy('timings')">Timings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bmkClass of bmkClasses; let i = index" (click)="onDataSelected()" [class.table-primary]="selectedId == i">
+        <td>{{ bmkClass.name }}</td>
+        <td>{{ bmkClass.description }}</td>
+        <td>{{ bmkClass.timings }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-container">
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary me-1" *ngIf="!IsEditable" (click)="onAddNew()">Add New</button>
+        <button type="button" class="btn btn-outline-primary me-1" *ngIf="selectedId>0 && !IsEditable" (click)="onDuplicate()">Duplicate</button>
+        <button type="button" class="btn btn-outline-primary me-5" *ngIf="selectedId>0 && !IsEditable" (click)="onUpdate()">Update</button>
+    </div>
+  </div>
+
+  <div class="w3-row" style="padding: 20px;" *ngIf="IsEditable">
+
+    <div class="w3-col w3-container m6 l4">
+  
+      <div class="form-container" >
+        <h2>Class Information Form</h2>
+        <form (ngSubmit)="onSubmit()">
+
+          <div class="mb-3">
+            <label for="name" >Name:</label>
+            <input type="text" class="form-control" name="name" [(ngModel)]="selectedClass.name" required>                          
+          </div>
+
+          <div class="mb-3">
+            <label for="description" >Description:</label>
+            <input type="text" class="form-control" name="description" [(ngModel)]="selectedClass.description" required>                          
+          </div>
+
+          <div class="mb-3">
+            <label for="timings" >Timings:</label>
+            <input type="text" class="form-control" name="timings" [(ngModel)]="selectedClass.timings" required>                          
+          </div>
+
+          <div class="mb-3">
+            <label for="zoom" >zoom:</label>
+            <input type="text" class="form-control" name="zoom" [(ngModel)]="selectedClass.zoom" required>                          
+          </div>
+
+          <div class="mb-3">
+            <label for="notes" >Notes:</label>
+            <textarea class="form-control" name="notes" [(ngModel)]="selectedClass.notes" rows="4"></textarea>                       
+          </div>
+
+          <div class="mb-3">
+            <label>Active Class?:</label>
+            <div class="radio-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="accountsuspended" name="accountsuspended" [(ngModel)]="selectedClass.active" [value]="true" required>
+                <label class="form-check-label" for="accountsuspended">Active</label>            
+              </div>
+              
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="accountnotsuspended" name="accountnotsuspended" [(ngModel)]="selectedClass.active" [value]="false" required>
+                <label class="form-check-label" for="accountnotsuspended">Not Active</label>  
+              </div>        
+            </div>                         
+          </div>
+
+          <button type="submit" class="btn btn-outline-primary me-1" [disabled]="!IsEditable">Submit</button>
+          <button type="button" class="btn btn-outline-danger" (click)="cancelForm()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+
+

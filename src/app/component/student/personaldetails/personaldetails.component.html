@@ -1,0 +1,91 @@
+<h2>Please check your details are updated</h2>
+
+<h3>Student's can change their contact details and profile picture only.</h3>
+<h3>Contact your teachers, to get changes in other fields.</h3>
+
+<div class="w3-col m6 l4">
+    <!-- Login form goes here -->
+    <div >
+        <div class="card">
+            <div class="card-body">
+  
+  
+  
+  <div class="form-container">
+      <h2>Student Information Form</h2>
+      <form (ngSubmit)="onSubmit()">
+  
+        <div class="mb-3">
+          <label for="name" >Name:</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="bmkuser.name" required [readonly]="bmkuser.usertype==0">                          
+        </div>
+  
+        <div class="mb-3">
+          <label for="surname" >Surname:</label>
+          <input type="text" class="form-control" name="surname" [(ngModel)]="bmkuser.surname" required [readonly]="bmkuser.usertype==0">                          
+        </div>
+  
+        <div class="mb-3">
+          <label for="parentsname" >Parent's Name:</label>
+          <input type="text" class="form-control" name="parentsname" [(ngModel)]="bmkuser.parentsname" required [readonly]="bmkuser.usertype==0">                          
+        </div>
+  
+        <div class="mb-3" >
+          <label for="dob" >Gender:</label>
+          <div class="radio-group">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="boy" name="gender" [(ngModel)]="bmkuser.gender" value="Boy" required [disabled]="bmkuser.usertype==0">
+              <label class="form-check-label" for="boy">Boy</label>            
+            </div>
+            
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="girl" name="gender" [(ngModel)]="bmkuser.gender" value="Girl" required [disabled]="bmkuser.usertype==0">
+              <label class="form-check-label" for="girl">Girl</label>  
+            </div>        
+          </div>                         
+        </div>
+  
+        <div class="mb-3">
+          <label for="dob" >Date of Birth:</label>
+          <input type="date" class="form-control" name="dob" value = "student.dob" [(ngModel)]="bmkuser.dob" required [readonly]="bmkuser.usertype==0">                          
+          <label for="dob" >Why do we want this? We will try to put students in classes according to age. Also we love to convey birthday wishes to our students.</label>
+        </div>
+  
+        <div class="mb-3">
+          <label for="contactnumber" >Contact Number:</label>
+          <input type="text" class="form-control" name="contactnumber" [(ngModel)]="bmkuser.contactnumber" required>                          
+        </div>
+  
+        <div class="mb-3">
+          <label for="whatsappnumber" >WhatsApp Number:</label>
+          <input type="text" class="form-control" name="whatsappnumber" [(ngModel)]="bmkuser.whatsappnumber" required>                          
+        </div>
+  
+        <div class="mb-3">
+          <label for="city" >City:</label>
+          <input type="text" class="form-control" name="city" [(ngModel)]="bmkuser.city" required>                          
+        </div>  
+  
+  
+        <div class="mb-3">
+          <label for="school" >Add a profile photo: (Max100kb)</label>
+          <input type="file" (change)="onFileSelected($event)">               
+        </div>
+        <div class="mb-3">
+  
+          <img src={{bmkuser.photourl}} alt="Profile picture" style="width:100px">
+        </div>
+
+        <div class="mb-3">
+            <label for="teachername">If you are an existing student please provide your class name so it will help our admin team:</label>
+            <select class="form-select" [(ngModel)]="selectedId" name="teachername" (change)="onTeacherDataSelected()">
+              <option *ngFor="let bmkClass of bmkClasses; let i = index" [value]="i">{{bmkClass.name}}</option>
+            </select>
+          </div>
+  
+  
+        <button type="submit" class="btn btn-outline-primary me-1">Submit</button>
+        <button type="button" class="btn btn-outline-danger" (click)="cancelForm()">Cancel</button>
+      </form>
+    </div>
+  

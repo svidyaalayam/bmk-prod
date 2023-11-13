@@ -1,0 +1,56 @@
+<br> 
+
+
+<button id="start" (click)="startGame()"  [disabled]="curNbr >= 0" style="font-size: 30px; line-height: 1.5; margin:10px">Start</button>
+<button id="stop" (click)="finishGame()" style="font-size: 30px; line-height: 1.5; margin:10px">Finish </button>
+<br>
+<br>
+
+<div class="w3-row w3-center">
+    <div class="w3-col w3-container s4 m2 l2" *ngFor="let qnbr of qstnNbrs; index as i" (click)="testAnswer(i)">
+        
+        <div class="div-telugu20" >{{listOfWords[qnbr]}} </div>
+         
+        <img src="https://drive.google.com/uc?export=download&id={{listImages[qnbr]}}" alt="Trulli" style="width:100%">
+
+        <div>{{listEnglishNames[qnbr]}} </div> 
+    </div>
+</div>
+
+
+
+
+    <div *ngIf="curNbr>=0">
+
+        <div class="div-telugu20">
+            <button (click)="soundFont()">విని పండును గుర్తించండి (Listen and Identify the Fruit) </button>
+        </div>
+        
+
+        <br>
+        <br>
+         
+        
+        <div class="div-telugu30">
+            <label>ప్రశ్న (Question) {{nbrsUsed.length}} of {{maxNbr}}</label>
+        </div>
+
+    </div>
+
+    <div *ngIf="wrongAnswers>0 || rightAnswers >0" class="div-telugu30">
+        <label style="color:red; padding-right:50px">తప్పులు (Wrong):{{wrongAnswers}}</label>
+        <label style="color:green">ఒప్పులు (Right):{{rightAnswers}}</label>
+        <br>
+        <div *ngIf="nbrsUsed.length == maxNbr">
+            <label > {{listOfWords[0]}} - {{listOfWords[maxNbr-1]}} ఆట అయిపోయింది (Game Finish)</label>
+            <br>
+            <label *ngIf="wrongAnswers == 0" style="color:green"> చాలా బాగా చేసేవు (Excellent Well Done!!)</label>
+        </div>
+        
+    </div>    
+
+
+
+
+
+

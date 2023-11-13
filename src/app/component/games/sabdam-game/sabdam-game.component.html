@@ -1,0 +1,83 @@
+
+
+<div class="w3-bar w3-light-grey w3-row" >
+    <div class="w3-bar-item w3-col l3 m3 s3">
+        <label for="editGend">Gender:</label>
+        <select id="editGend" (change)="applyGender()" style="min-width: 50px">
+        <option *ngFor="let genderName of ['Mascular', 'Feminine', 'Neutral']; index as i" value={{i}} >{{genderName}}</option>        
+        </select> 
+        <br>
+        <br>
+        <label for="editEnd">Ending with:</label>
+        <select id="editEnd" (change)="applyEnding()" style="min-width: 50px">
+        <option *ngFor="let endOfNames of sWordEnds;" value={{endOfNames[0]}} >{{endOfNames[1]}}</option>        
+        </select>
+    </div>
+     
+
+    <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setMainOption(1)" [ngClass]="iOptionNumber==1 ? 'btnLangSel': 'btnLangNotSel'">Learn</button>
+    <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setMainOption(2)" [ngClass]="iOptionNumber==2 ? 'btnLangSel': 'btnLangNotSel'">Practice</button>
+    
+    
+    <input  type="checkbox" id="audioOff" (change)="bTransRequired = !bTransRequired">
+    <label for="audioOff" style="padding-left: 5px; "> :  Transliterature On / Off</label>   
+ 
+</div>
+
+<div class="div-hindi30" style="background-color: lightpink">{{getSabdamTitleSan()}}
+    <p style="font-size: 16px;" *ngIf = "bTransRequired">{{getSabdamTitleEng()}}</p>
+</div>
+
+<div *ngIf = "iOptionNumber==1">
+    <table class="sabdams first-column" >
+        <tr>
+          <th>Context</th>
+          <th>विभक्तिः (Vibhakti)</th>
+          <th>एकवचनम्‌ (Singular)</th>
+          <th>द्विवचनम्‌ (Dual)</th>
+          <th>बहुवचनम्‌ (Plural)</th>
+        </tr>
+        <tr *ngFor="let rowdata of sabdamDataSan; index as i">
+            <td style="font-size: 16px;">{{sContext[i]}}</td>
+            <td style="font-size: 20px; color: red;">{{vibhaktiHeadsSan[i]}} <p style="font-size: 16px;" *ngIf = "bTransRequired">{{vibhaktiHeadsEng[i]}}</p></td>        
+            <td *ngFor="let titleName of rowdata; index as j">{{titleName}} <p style="font-size: 16px;" *ngIf = "bTransRequired">{{sabdamDataEng[i][j]}}</p></td>
+        </tr> 
+
+      </table>
+</div>
+
+<div *ngIf = "iOptionNumber==2">
+    <table class="sabdams first-column">
+        <tr>
+          <th>विभक्तिः (Vibhakti)</th>
+          <th>एकवचनम्‌ (Singular)</th>
+          <th>द्विवचनम्‌ (Dual)</th>
+          <th>बहुवचनम्‌ (Plural)</th>
+        </tr>
+    
+        <tr *ngFor="let rowdata of sabdamDataSan; index as i">
+            <td style="font-size: 20px; color: red;">{{vibhaktiHeadsSan[i]}} <p style="font-size: 16px;" *ngIf = "bTransRequired">{{vibhaktiHeadsEng[i]}}</p></td>        
+            <td *ngFor="let titleName of rowdata; index as j">{{titleName}} <p style="font-size: 16px;" *ngIf = "bTransRequired">{{sabdamDataEng[i][j]}}</p></td>
+        </tr> 
+    
+      </table>
+    
+      <div class="w3-bar w3-light-grey w3-row" >
+        <button *ngFor="let i of nbrsForDisplay" style="font-size: 20px; line-height: 1.5; margin:10px" (click)="testAnswer(i)" [style.background-color]= "(curNbr > i)? 'green':''  ">{{getSabdamTextSan(i)}} <p style="font-size: 16px;" *ngIf = "bTransRequired">{{getSabdamTextEng(i)}}</p></button>
+      </div>
+
+      <div *ngIf="wrongAnswers>0 || rightAnswers >0" class="div-hindi30">
+        <label style="color:red; padding-right:50px">दोषाः (Wrong):{{wrongAnswers}}</label>
+        <label style="color:green">साधु (Right):{{rightAnswers}}</label>
+        <br>
+        <div *ngIf="gamefinish">
+            <label > क्रीडा समाप्तम्‌ (Game Finish)</label>
+            <br>
+            <label *ngIf="wrongAnswers == 0" style="color:green"> बहु समीचीनम्‌ (Excellent Well Done!!)</label>
+        </div>
+        
+    </div>
+
+</div>
+
+  

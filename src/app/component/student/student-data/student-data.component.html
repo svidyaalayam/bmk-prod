@@ -1,0 +1,48 @@
+<app-welcome-message [dataFromParent]="welcomeData" *ngIf="nShowTheTab==0"></app-welcome-message>
+
+<div class="container">
+  <div class="inline-buttons" *ngIf="nShowTheTab==0">
+    <button type="button" class="warning-button" (click)="activateAccount()" *ngIf="bShowActivateButton">Send another Activation link</button>
+    <button type="button" class="primary-button" (click)="nShowTheTab = 1">Update Personal Details</button>
+    
+    <button type="button" class="primary-button" *ngIf="bValidStudent" (click)="nShowTheTab = 10">My Subscriptions</button>
+    <button type="button" class="primary-button" *ngIf="bValidStudent" (click)="nShowTheTab = 11">My Classes</button>
+    <button type="button" class="primary-button" *ngIf="bValidStudent" (click)="nShowTheTab = 12">Academic Calendar</button>
+
+
+      <button type="button" class="primary-button" *ngIf="bValidTeacher" (click)="nShowTheTab = 21">My Classes</button>
+      <button type="button" class="primary-button" *ngIf="bValidTeacher" (click)="nShowTheTab = 22">Academic Calendar</button>
+
+    <button type="button" class="primary-button" *ngIf="bValidAdmin" (click)="nShowTheTab = 32">Users Management</button>
+    <button type="button" class="primary-button" *ngIf="bValidAdmin" (click)="nShowTheTab = 33">Classes Management</button>
+
+  </div>
+
+  
+
+  <div class="inner-container" *ngIf="nShowTheTab>0">
+    <div>
+      <app-personaldetails *ngIf="nShowTheTab==1" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-personaldetails>
+      <app-subscriptions *ngIf="nShowTheTab==10" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-subscriptions>
+      
+      <app-studentclases *ngIf="nShowTheTab==11" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-studentclases>
+      <app-teacherclases *ngIf="nShowTheTab==21" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-teacherclases>
+
+      <app-studentcalander *ngIf="nShowTheTab==12" [bmkuser]="bmkuser"></app-studentcalander>
+      <app-teachercalander *ngIf="nShowTheTab==22" [bmkuser]="bmkuser"></app-teachercalander>
+      
+      <app-checkusers *ngIf="nShowTheTab==32"></app-checkusers>
+      <app-classlist *ngIf="nShowTheTab==33"></app-classlist>
+          
+    </div>  
+    <br>   
+  </div>
+
+  
+
+
+</div>
+<div *ngIf="nShowTheTab>0">
+  <button type="button" class="primary-button"  (click)="nShowTheTab = 0">Back to Home Page</button>
+</div>
+

@@ -1,0 +1,194 @@
+.btnClr {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
+    font-family: 'mTelFntScr1';
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  .btnAction {
+    background-color: pink; /* Green */
+    border: none;
+    color: indigo;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
+    font-family: 'mTelFnt2';
+    font-size: 28px;
+    line-height: 1.5;
+  }
+
+  .btnLesson {
+    background-color: lightblue; /* Green */
+    border: none;
+    color: blue;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
+    font-family: 'mTelFnt1';
+    font-size: 28px;
+    line-height: 1.5;
+  }
+
+  .btnLtter {
+    background-color: lightblue; 
+    border:1px solid #4CAF50;
+    color: red;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 1px 2px 1px 2px;
+    font-family: 'mTelFnt1';
+    font-size: 40px;
+    line-height: 1.5;
+  }
+
+  .btnLtter2 {
+    background-color:lightyellow; 
+    line-height: 1.5;
+
+  }
+  .btnLtter3 {
+    background-color:lightgreen; 
+    line-height: 1.5;
+
+  }
+
+  @media only screen and (max-width: 900px) {
+    .btnClr {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 0px 0px 0px 0px;
+      font-family: 'mTelFntScr1';
+      font-size: 18px;
+    }
+  
+    .btnAction {
+      background-color: pink; /* Green */
+      border: none;
+      color: indigo;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 0px 0px 0px 0px;
+      font-family: 'mTelFnt2';
+      font-size: 21px;
+    }
+  
+    .btnLesson {
+      background-color: lightblue; /* Green */
+      border: none;
+      color: blue;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 0px 0px 0px 0px;
+      font-family: 'mTelFnt1';
+      font-size: 21px;
+    }
+  
+    .btnLtter {
+      background-color: lightblue; 
+      border:1px solid #4CAF50;
+      color: red;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 1px 2px 1px 2px;
+      font-family: 'mTelFnt1';
+      font-size: 24px;
+    }
+  
+    .btnLtter2 {
+      background-color:lightyellow; 
+  
+    }
+    .btnLtter3 {
+      background-color:lightgreen; 
+  
+    }
+  }
+
+
+
+  @media only screen and (max-width: 600px) {
+    .btnClr {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 0px 0px 0px 0px;
+      font-family: 'mTelFntScr1';
+      font-size: 12px;
+    }
+  
+    .btnAction {
+      background-color: pink; /* Green */
+      border: none;
+      color: indigo;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 0px 0px 0px 0px;
+      font-family: 'mTelFnt2';
+      font-size: 14px;
+    }
+  
+    .btnLesson {
+      background-color: lightblue; /* Green */
+      border: none;
+      color: blue;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 0px 0px 0px 0px;
+      font-family: 'mTelFnt1';
+      font-size: 14px;
+    }
+  
+    .btnLtter {
+      background-color: lightblue; 
+      border:1px solid #4CAF50;
+      color: red;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      padding: 1px 2px 1px 2px;
+      font-family: 'mTelFnt1';
+      font-size: 18px;
+    }
+  
+    .btnLtter2 {
+      background-color:lightyellow; 
+  
+    }
+    .btnLtter3 {
+      background-color:lightgreen; 
+  
+    }
+  }

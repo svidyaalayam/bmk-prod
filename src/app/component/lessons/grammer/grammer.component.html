@@ -1,0 +1,38 @@
+<div class="w3-row">
+
+    <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+
+        <div class="div-telugu30">
+            వ్యాకరణము (Grammer)
+        </div>
+        
+
+        <div class="w3-bar w3-light-grey" style="padding-left: 10%; padding-right: 10%;">
+            <div *ngFor="let wsObjs of grammerlinks; index as i">
+                <button  class="w3-btn" (click)="incrementCounter(i)">
+                    <div id="{{ 'wsObjs' + i }}" class="div-telugu20">{{wsObjs.titleName}} </div>
+                </button>
+                <br>
+            </div>
+            
+        </div>
+
+        <div *ngFor="let wsObjs of grammerlinks">        
+
+          <div class="w3-bar w3-light-grey" style="padding-left: 10%; padding-right: 10%;">
+         <!--   <button *ngFor="let pdflink of wsObjs.pdfLinks" class="w3-bar-item w3-button w3-mobile" (click)="setLink(pdflink.vlink)"><div class="div-telugu20">{{pdflink.title}}</div></button> -->
+          </div>
+
+        </div>
+    
+    
+    </div>
+
+
+    <div class="w3-col m8 l8 w3-mobile" style="padding: 10px;">
+
+        <iframe [src]="grammerlinks[currentCount].pdfLink" width="640" height="960" allow="autoplay"></iframe>        
+    
+    </div>
+
+</div>

@@ -1,0 +1,60 @@
+<br>
+
+<button id="start" (click)="startGame()"  [disabled]="curNbr >= 0" style="font-size: 30px; line-height: 1.5; margin:10px">Start</button>
+<button id="stop" (click)="finishGame()" style="font-size: 30px; line-height: 1.5; margin:10px">Finish </button>
+
+<br>
+<br>
+<div>
+    <div class="w3-bar w3-light-grey w3-row">
+
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:violet" (click)="testAnswer(0)" >ఊదా</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:indigo" (click)="testAnswer(1)" >నీలి</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:blue" (click)="testAnswer(2)" >నీలం</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:green" (click)="testAnswer(3)" >ఆకుపచ్చ</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:yellow" (click)="testAnswer(4)" >పసుపు</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:orange" (click)="testAnswer(5)" >నారింజ</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:red" (click)="testAnswer(6)" >ఎరుపు</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:black" (click)="testAnswer(7)" >నలుపు</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:brown" (click)="testAnswer(8)" >గోధుమ</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:grey" (click)="testAnswer(9)" >బూడిద</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:pink" (click)="testAnswer(10)" >గులాబీ</button>
+        <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:silver" (click)="testAnswer(11)" >తెలుపు</button>
+    
+    </div>
+
+    <div >
+
+        <br>
+    
+        <div *ngIf="curNbr>=0">
+        
+            <br>
+            <div class="div-telugu30">
+                <button (click)="soundFont()">విని రంగును గుర్తించండి (Listen and Identify the color) </button>
+            </div>
+            
+
+   
+            <br>  
+            
+            <div class="div-telugu30" *ngIf="curNbr <= maxNbr">
+                <label>ప్రశ్న (Question) {{curNbr+1}} of {{maxNbr+1}}</label>
+            </div>
+    
+        </div>
+    
+        <div *ngIf="wrongAnswers>0 || rightAnswers >0" class="div-telugu30">
+            <label style="color:red; padding-right:50px">తప్పులు (Wrong):{{wrongAnswers}}</label>
+            <label style="color:green">ఒప్పులు (Right):{{rightAnswers}}</label>
+            <br>
+            <div *ngIf="gamefinish">
+                <label > ఆట అయిపోయింది (Game Finish)</label>
+                <br>
+                <label *ngIf="wrongAnswers == 0" style="color:green"> చాలా బాగా చేసేవు (Excellent Well Done!!)</label>
+            </div>
+            
+        </div>    
+    
+    </div>
+</div>

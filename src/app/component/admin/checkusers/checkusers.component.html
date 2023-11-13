@@ -1,0 +1,277 @@
+<h2>Users Management</h2>
+<h3>Check Users Details - Assign Students to a class</h3>
+
+
+<div class="form-container">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="selectedFilterOption" (change)="onFilterSelectionChange()">
+          <option *ngFor="let filterOpt of filterOptions" [value]="filterOpt">{{filterOpt}}</option>
+        </select>
+      </div>
+      <div class="col-md-4 mb-3">
+        <input type="text" class="form-control" [(ngModel)]="searchWithEmail" (keyup.enter)="getUserWithEmail(searchWithEmail)" *ngIf="selectedFilterOption=='Search by Email'" placeholder="Enter Email...">
+
+        <select class="form-select" [(ngModel)]="selectedClassid" (change)="onClassSelectionChange()" *ngIf="selectedFilterOption=='Search by class'">
+          <option *ngFor="let bmkClass of bmkClasses" [value]="bmkClass.classid">{{bmkClass.name}}</option>
+        </select>
+
+      </div>
+  
+      <div class="col-md-4 mb-3" *ngIf="showTable">          
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="showFilters" id="flexCheckDefault" (change)="onFilters()">
+            <label class="form-check-label" for="flexCheckDefault">
+              Show Filters
+            </label>
+        </div>
+        
+      </div>
+    </div>
+    <h4 *ngIf="!showTable && !selectedUser">{{searchResult}}</h4>
+  </div>
+
+
+
+
+  
+
+<table class="table table-hover" *ngIf="showTable">
+    <thead>
+      <tr>
+        <th>Login ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="showFilters">
+        <td>
+          <input type="text" [(ngModel)]="filterTextLogin" (input)="filterData()" placeholder="Filter by...">
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="filterTextName" (input)="filterData()" placeholder="Filter by...">
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="filterTextSurname" (input)="filterData()" placeholder="Filter by...">
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="filterTextGender" (input)="filterData()" placeholder="Filter by...">
+        </td>
+      </tr>      
+      <tr *ngFor="let user of filteredusers" (click)="selectUser(user)" [class.table-primary]="user.loginid === selectedUser?.loginid">
+        <td>{{ user.loginid }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.surname }}</td>
+        <td>{{ user.gender }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+    <div class="mb-3">
+        <button type="button" class="btn btn-outline-primary me" *ngIf="selectedUser && !IsEditable" (click)="showUserInformation()">Update User</button>
+    </div>
+  </div>
+
+  <div class="w3-row" style="padding: 20px;" *ngIf="selectedUser && IsEditable">
+    <div *ngIf="selectedUser.usertype==0">
+    <div *ngIf="sClassesEnrolled.length > 0">
+      <h3>The user is enrolled for the following courses</h3>
+      <table class="table table-hover"  >
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Enrolled On</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sClassEnrolled of sClassesEnrolled; let i = index" (click)="onCourseDataSelected(i)" [class.table-primary]="selectedClassIndex == i">
+            <td>{{ getCourseDetailsForId(sClassEnrolled.courseid) }}</td>
+            <td>{{ getDateTimeForTimeStamp(sClassEnrolled.enroldate) }}</td>
+            <td>{{ sClassEnrolled.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+    <h3>{{userClassText}}</h3>
+    <table class="table table-hover" *ngIf="selectedUsersClassData.length > 0" >
+      <thead>
+        <tr>
+          <th>Class Name</th>
+          <th>Description</th>
+          <th>Timings</th>
+          <th>Joined</th>
+          <th>Finished</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bmkClass of selectedUsersClassData; let i = index" (click)="onClassDataSelected(i)" [class.table-primary]="selectedClassIndex == i">
+          <td>{{ bmkClass.name }}</td>
+          <td>{{ bmkClass.description }}</td>
+          <td>{{ bmkClass.timings }}</td>
+          <td>{{ selecteUserClassesRelData[i].startdate }}</td>
+          <td>{{ selecteUserClassesRelData[i].enddate }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <button type="button" class="btn btn-outline-primary me-1" (click)="showTeachersForUserToAdd = true; selectedClassidToAdd=''">Add To a class</button>
+     
+      </div>
+      <div class="col-md-4" *ngIf="!showTeachersForUserToAdd && selectedClassIndex >= 0">
+        <button type="button" class="btn btn-outline-danger" (click)="removeUserFromClass()" *ngIf = "selectedClassIndex >= 0">Remove from class</button>
+      </div>
+  
+      <div class="col-md-4" *ngIf="showTeachersForUserToAdd">
+        <select class="form-select" [(ngModel)]="selectedClassidToAdd" (change)="onClassSelectionChangeToAddUser()">
+          <option *ngFor="let bmkClass of bmkClasses" [value]="bmkClass.classid">{{bmkClass.name}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4" *ngIf="showConfirmButton">
+        <button type="button" class="btn btn-outline-primary" (click)="addOrrRemoveUserToClass()">Confirm</button>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+    <div class="w3-col w3-container m6 l4">
+
+
+
+
+
+<div class="form-container" >  
+
+    <h2>User Information</h2>
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="name" >Name:</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="selectedUser.name" required>                          
+      </div>
+
+      <div class="mb-3">
+        <label for="surname" >Surname:</label>
+        <input type="text" class="form-control" name="surname" [(ngModel)]="selectedUser.surname" required>                          
+      </div>
+
+      <div class="mb-3">
+        <label for="parentsname" >Parent's Name:</label>
+        <input type="text" class="form-control" name="parentsname" [(ngModel)]="selectedUser.parentsname" required>                          
+      </div>
+
+      <div class="mb-3">
+        <label>Gender:</label>
+        <div class="radio-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="boy" name="gender" [(ngModel)]="selectedUser.gender" value="Boy" required>
+            <label class="form-check-label" for="boy">Boy</label>            
+          </div>
+          
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="girl" name="gender" [(ngModel)]="selectedUser.gender" value="Girl" required>
+            <label class="form-check-label" for="girl">Girl</label>  
+          </div>        
+        </div>                         
+      </div>
+
+      <div class="mb-3">
+        <label for="dob" >Date of Birth:</label>
+        <input type="date" class="form-control" name="dob" value = "student.dob" [(ngModel)]="selectedUser.dob" required>                          
+        <label for="dob" >Why do we want this? We will try to put students in classes according to age. Also we love to convey birthday wishes to our students.</label>
+      </div>
+
+      <div class="mb-3">
+        <label for="contactnumber" >Contact Number:</label>
+        <input type="text" class="form-control" name="contactnumber" [(ngModel)]="selectedUser.contactnumber" required>                          
+      </div>
+
+      <div class="mb-3">
+        <label for="whatsappnumber" >WhatsApp Number:</label>
+        <input type="text" class="form-control" name="whatsappnumber" [(ngModel)]="selectedUser.whatsappnumber" required>                          
+      </div>
+
+      <div class="mb-3">
+        <label for="city" >City:</label>
+        <input type="text" class="form-control" name="city" [(ngModel)]="selectedUser.city" required>                          
+      </div>  
+
+      <div class="mb-3">
+        <label for="teacher" >Teacher:</label>
+        <input type="text" class="form-control" name="teacher" [(ngModel)]="selectedUser.teachername" required [readOnly]="true">                          
+      </div>  
+
+
+      <div class="mb-3">
+
+        <img src={{selectedUser.photourl}} alt="Profile picture" style="width:100px">
+      </div>
+
+      <div class="mb-3">
+        <label for="city" >City:</label>
+        <input type="text" class="form-control" name="city" [(ngModel)]="selectedUser.city" required>                          
+      </div> 
+
+      <div class="mb-3" *ngIf="!selectedUser.accepted">
+        <label>User Registration Accepted:</label>
+        <div class="radio-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="accepted" name="accepted" [(ngModel)]="selectedUser.accepted" [value]="true" required>
+            <label class="form-check-label" for="accepted">Accepted</label>            
+          </div>
+          
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="rejected" name="accepted" [(ngModel)]="selectedUser.accepted" [value]="false" required>
+            <label class="form-check-label" for="rejected">Not Accepted</label>  
+          </div>        
+        </div>                         
+      </div>
+
+      <div class="mb-3">
+                <button type="button" class="btn btn-outline-danger" *ngIf="IsInactivateRequired" (click)="openActivate = true">{{strInactiveCmdTitle}}</button>
+    </div>
+
+      <div class="form-container" *ngIf="selectedUser && openActivate">
+        <div class="mb-3">
+          <label>{{strInactiveCmdTitle}}:</label>
+          <div class="radio-group">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="accountsuspended" name="accountsuspended" [(ngModel)]="selectedUser.accountsuspended" [value]="true" required>
+              <label class="form-check-label" for="accountsuspended">Suspend</label>            
+            </div>
+            
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="accountnotsuspended" name="accountnotsuspended" [(ngModel)]="selectedUser.accountsuspended" [value]="false" required>
+              <label class="form-check-label" for="accountnotsuspended">Activate</label>  
+            </div>        
+          </div>                         
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary me-1" [disabled]="!IsEditable">Submit</button>
+      <button type="button" class="btn btn-outline-danger" (click)="cancelForm()">Cancel</button>
+    </form>
+</div>
+</div>
+
+
+  

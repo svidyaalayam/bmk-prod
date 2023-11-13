@@ -1,0 +1,69 @@
+<br>
+
+<div class="w3-bar w3-light-grey w3-row" >
+    <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setLanguage(1)" [disabled]="curNbr >= 0" [ngClass]="iLanguageOption==1 ? 'btnLangSel': 'btnLangNotSel' ">Telugu</button>
+    <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setLanguage(2)" [disabled]="curNbr >= 0" [ngClass]="iLanguageOption==2 ? 'btnLangSel': 'btnLangNotSel' ">Sanskrit</button>
+    <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" id="start" (click)="startGame()"  [disabled]="curNbr >= 0" style="font-size: 30px; line-height: 1.5; margin:10px">Start</button>
+    <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" id="stop" (click)="finishGame()" style="font-size: 30px; line-height: 1.5; margin:10px">Finish </button>
+
+    <label for="editMaxValue" style="padding-left: 5px;">Maximum Value:</label>
+    <select id="editMaxValue" (change)="applyUserOptions()" [disabled]="curNbr >= 0">
+        <option *ngFor="let i of [5, 10, 20, 30, 50, 80, 100]" value={{i}} [selected]="i === 20">{{i}}</option>        
+    </select> 
+
+    <br>
+    <br>
+
+    <label for="editNbrOfqstns" style="padding-left: 5px;">Number of questions:</label>
+    <select id="editNbrOfqstns" (change)="applyUserOptions()" [disabled]="curNbr >= 0">
+        <option *ngFor="let i of userQuestionOptions" value={{i}} [selected]="i === 5" >{{i}}</option>        
+    </select> 
+</div>
+
+
+<br>
+<br>
+<div>
+    <div class="w3-bar w3-light-grey w3-row" >
+        <button *ngFor="let i of nbrsForDisplay" style="font-size: 60px; line-height: 1.5; margin:10px" (click)="testAnswer(i-1)" >{{i}}</button>
+    </div>
+
+    <div >
+        <br>
+
+    
+        <div *ngIf="curNbr>=0">
+        
+            <br>
+            <div class="div-telugu30">
+                <button (click)="soundFont()">విని అంకెలను గుర్తించండి (Listen and Identify the number) </button>
+            </div>
+            
+
+   
+            <br>  
+            
+            <div class="div-telugu30" *ngIf="curNbr <= maxQstns">
+                <label>ప్రశ్న (Question) {{curNbr+1}} of {{maxQstns+1}}</label>
+            </div>
+
+            <p>Time taken : {{timeLeft}} Seconds </p>
+    
+        </div>
+    
+        <div *ngIf="wrongAnswers>0 || rightAnswers >0" class="div-telugu30">
+            <label style="color:red; padding-right:50px">తప్పులు (Wrong):{{wrongAnswers}}</label>
+            <label style="color:green">ఒప్పులు (Right):{{rightAnswers}}</label>
+            <br>
+            <div *ngIf="gamefinish">
+                <label > ఆట అయిపోయింది (Game Finish)</label>
+                <br>
+                <label *ngIf="wrongAnswers == 0" style="color:green"> చాలా బాగా చేసేవు (Excellent Well Done!!)</label>
+            </div>
+            
+        </div>    
+
+        
+    
+    </div>
+</div>

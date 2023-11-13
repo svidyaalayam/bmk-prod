@@ -1,0 +1,52 @@
+<div>
+    <div class="w3-light-grey" >
+
+        <button class="btnClr" style="background-color:violet; color: white;" (click)="testAnswer(0)" >{{listOfNames[0]}}</button> <br>
+        <button class="btnClr" style="background-color:indigo; color: white;" (click)="testAnswer(1)" >{{listOfNames[1]}}</button> <br>
+        <button class="btnClr" style="background-color:blue; color: white;" (click)="testAnswer(2)" >{{listOfNames[2]}}</button> <br>
+        <button class="btnClr" style="background-color:green; color: white;" (click)="testAnswer(3)" >{{listOfNames[3]}}</button> <br>
+        <button class="btnClr" style="background-color:yellow; color: black;" (click)="testAnswer(4)" >{{listOfNames[4]}}</button> <br>
+        <button class="btnClr" style="background-color:orange; color: black;" (click)="testAnswer(5)" >{{listOfNames[5]}}</button> <br>
+        <button class="btnClr" style="background-color:red; color: black;" (click)="testAnswer(6)" >{{listOfNames[6]}}</button>
+        
+
+    </div>
+
+    <div >
+        <br>
+        <br>
+
+        <button id="start" (click)="startGame()"  [disabled]="curNbr >= 0" style="font-size: 30px; line-height: 1.5; margin:10px">Start</button>
+        <button id="stop" (click)="finishGame()" style="font-size: 30px; line-height: 1.5; margin:10px">Finish </button>
+    
+        <div *ngIf="curNbr>=0">
+        
+            <br>
+            <div class="div-telugu30">
+                <button (click)="soundFont()">విని వారము రోజును గుర్తించండి (Listen and Identify the day of week) </button>
+            </div>
+            
+
+   
+            <br>  
+            
+            <div class="div-telugu30" *ngIf="curNbr <= maxNbr">
+                <label>ప్రశ్న (Question) {{curNbr+1}} of {{maxNbr+1}}</label>
+            </div>
+    
+        </div>
+    
+        <div *ngIf="wrongAnswers>0 || rightAnswers >0" class="div-telugu30">
+            <label style="color:red; padding-right:50px">తప్పులు (Wrong):{{wrongAnswers}}</label>
+            <label style="color:green">ఒప్పులు (Right):{{rightAnswers}}</label>
+            <br>
+            <div *ngIf="gamefinish">
+                <label > ఆట అయిపోయింది (Game Finish)</label>
+                <br>
+                <label *ngIf="wrongAnswers == 0" style="color:green"> చాలా బాగా చేసేవు (Excellent Well Done!!)</label>
+            </div>
+            
+        </div>    
+    
+    </div>
+</div>

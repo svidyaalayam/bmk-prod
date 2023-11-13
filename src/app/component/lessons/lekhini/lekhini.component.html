@@ -1,0 +1,58 @@
+<div  >
+
+    <div class="w3-bar w3-light-grey w3-row" >
+         <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setLanguage(1)">Telugu</button>
+         <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setLanguage(2)">Sanskrit</button>
+         <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setCommandBtns(1)">అచ్చులు</button>
+         <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setCommandBtns(2)">హల్లులు</button>
+         <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setCommandBtns(3)">గుణింతాలు</button>
+         <button class="w3-bar-item w3-button btnLesson w3-col l2 m2 s2" (click)="setCommandBtns(4)">ఒత్తులు</button>
+     </div>
+
+     <br>
+     <div class="w3-bar w3-light-grey w3-row" >
+         <button class="w3-bar-item w3-button btnAction w3-col l4 m4 s4" (click)="iCommand=1; setHTML()">చూసి నేర్చుకోండి</button>
+         <button class="w3-bar-item w3-button btnAction w3-col l4 m4 s4" (click)="iCommand=2; setHTML()">అక్షరములు దిద్దండి</button>
+         <button class="w3-bar-item w3-button btnAction w3-col l4 m4 s4" (click)="iCommand=3; pOutLine=true; setHTML()">రంగులు వేయండి</button>
+     </div>
+     <br>
+     <div class="w3-bar w3-light-grey w3-row">
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:violet" (click)="pOutLine=false;pRed=148;pGreen=0;pBlue=211; setHTML()" >ఊదా</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:indigo" (click)="pOutLine=false;pRed=75;pGreen=0;pBlue=130; setHTML()" >నీలి</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:blue" (click)="pOutLine=false;pRed=0;pGreen=0;pBlue=255; setHTML()" >నీలం</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:green" (click)="pOutLine=false;pRed=0;pGreen=255;pBlue=0; setHTML()" >ఆకుపచ్చ</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:yellow" (click)="pOutLine=false;pRed=255;pGreen=255;pBlue=0; setHTML()" >పసుపు</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:orange" (click)="pOutLine=false;pRed=255;pGreen=127;pBlue=0; setHTML()" >నారింజ</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:red" (click)="pOutLine=false;pRed=255;pGreen=0;pBlue=0; setHTML()" >ఎరుపు</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:black" (click)="pOutLine=false;pRed=0;pGreen=0;pBlue=0; setHTML()" >నలుపు</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:brown" (click)="pOutLine=false;pRed=165;pGreen=42;pBlue=42; setHTML()" >గోధుమ</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:grey" (click)="pOutLine=false;pRed=50;pGreen=50;pBlue=50; setHTML()" >బూడిద</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:pink" (click)="pOutLine=false;pRed=255;pGreen=192;pBlue=203; setHTML()" >గులాబీ</button>
+             <button class="w3-bar-item w3-button btnClr w3-col l2 m2 s3" style="background-color:silver" (click)="pOutLine=false;pRed=255;pGreen=255;pBlue=255; setHTML()" >తెలుపు</button>
+         
+     </div>
+
+     <div class="w3-row">
+         <div class="w3-col l4 m4 s6" > 
+                            
+             <div *ngFor="let sLetter of sCommandLettersVottu">
+                 <button *ngFor="let sLet of sLetter" class="btnLtter btnLtter3" (click)="setTextVottu(sLet.t2)">
+                    <div [ngStyle]="{'background-color':sLet.t3 === 0 ? 'lightblue' : 'lightyellow'}">{{sLet.t1}}</div> 
+                 </button>
+             </div>
+             <div *ngFor="let sLetter of sCommandLettersSub">
+                 <button *ngFor="let sLet of sLetter" class="btnLtter btnLtter2" (click)="setTextSecondary(sLet.t2)">{{sLet.t1}}</button>
+             </div>
+             <div *ngFor="let sLetter of sCommandLetters">
+                 <button *ngFor="let sLet of sLetter" class="btnLtter" (click)="setFontText(sLet.t2)">{{sLet.t1}}</button>
+             </div>
+         </div>
+         <div class="w3-col l8 m8 s6">
+             <canvas #hindi width="600" height="400"  style="border:1px solid white; background-color: #D3D3D3;">
+                 Your browser does not support the HTML5 canvas tag.</canvas> 
+
+         </div>
+
+     </div>        
+
+</div>  

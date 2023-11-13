@@ -1,0 +1,137 @@
+<h2>Regiser as Teachers for Balamukundam Classes</h2>
+
+<div *ngIf="regStep==1">
+
+  <h3>Currently, our Balamukundam school, provides the following courses. Kindly specify the course you are interested in enrolling.</h3>
+
+  <div *ngFor="let sc of sClassesOffered">
+    <div class="card mb-3" >
+      <div class="card-body" >
+        <div class="row" >
+            <div class="col-md-8">
+                <h3 class="card-title">{{sc.title}}</h3>
+                <p class="card-text">{{sc.description}}</p>
+            </div>
+            <div class="col-md-4" >
+                <img class="card-img-right" style="height: auto; width: 150px" src="../../../assets/images/teaches.png" alt="Card image cap">
+                <img class="card-img-right" style="height: auto; width: 80px" src={{sc.src}} alt="Card image cap">
+                
+            </div>
+
+        </div>
+        
+        <div class="input-group mb-3" style="margin-top: 20px;">
+          <input  type="checkbox" id="enrolled" [(ngModel)]="sc.enrolled" >
+        <label for="enrolled" style="padding-left: 5px; "> Enroll</label>   
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-info" style="margin: 20px;" (click)="moveNext()" >Next</button>
+  <div class="mb-3">
+    <h5 class="text-danger">{{sMoveResponse}}</h5>
+  </div>                     
+  
+</div>
+
+<div  *ngIf="regStep>1">
+  <h3>Terms & Conditions</h3>
+  <p>Kindly review our terms and conditions, and proceed with the registration if you agree and are content with the provided information.</p>
+  <div class="input-group mb-3">
+    <input  type="checkbox" id="closeAcc" [(ngModel)]="bCloseTandC" >
+    <label for="closeAcc" style="padding-left: 5px; "> Close on Acccept / Uncheck to Show T&C</label>   
+  </div>
+  <div *ngFor="let tc of sTermsAndConditions">
+    <div class="card mb-3" *ngIf="!bCloseTandC || (bCloseTandC && !tc.accepted)">
+      <div class="card-body" >
+        <h3 class="card-title">{{tc.title}}</h3>
+        <p class="card-text">{{tc.description}}</p>
+        <div class="input-group mb-3">
+          <input  type="checkbox" id="accepted" [(ngModel)]="tc.accepted" >
+        <label for="accepted" style="padding-left: 5px; "> Acccept</label>   
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="w3-row" style="padding: 20px;">
+
+      <div class="w3-col w3-container  m6 l4">
+          <!-- Login form goes here -->
+          <div >
+              <div class="card">
+                  <div class="card-body"> 
+                      <form>
+                          <div class="mb-3">
+                              
+                          </div>
+                          <div class="mb-3">
+                            <label for="email" class="form-label">Email: </label> 
+                            <label for="email" class="text-danger" >{{this.sErrorEmail}} </label>
+                            <input type="email" class="form-control" name="email" [(ngModel)]="email">                          
+                          </div>
+                          <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <label for="password" class="text-danger">{{sErrorPassword}}</label>
+                            <input type="password" class="form-control" name="password" [(ngModel)]="password">
+                          </div>  
+                        
+                          
+
+
+                            <div class="mb-3">
+                              <label for="name" class="form-label">Name:</label>
+                              <label for="name" class="text-danger">{{sErrorName}}</label>
+                              <input type="text" class="form-control" name="name" [(ngModel)]="sName" required>                          
+                            </div>
+                      
+                            <div class="mb-3">
+                              <label for="surname" class="form-label">Surname:</label>
+                              <label for="surname" class="text-danger">{{sErrorSurname}}</label>
+                              <input type="text" class="form-control" name="surname" [(ngModel)]="sSurname" required>                          
+                            </div>
+                      
+                      
+                            <div class="mb-3">
+                              <label for="dob" class="form-label">Gender:</label>
+                              <label for="dob" class="text-danger">{{sErrorGender}}</label>
+                              <div class="radio-group">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" id="boy" name="gender" [(ngModel)]="sGender" value="Boy" required>
+                                  <label class="form-check-label" for="boy">Male</label>            
+                                </div>
+                                
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" id="girl" name="gender" [(ngModel)]="sGender" value="Girl" required>
+                                  <label class="form-check-label" for="girl">Female</label>  
+                                </div>        
+                              </div>                         
+                            </div>                      
+                     
+                            <div class="mb-3">
+                              <label for="contactnumber" class="form-label">Contact Number:</label>
+                              <label for="contactnumber" class="text-danger">{{sErrorContactnumber}}</label>
+                              <input type="text" class="form-control" name="contactnumber" [(ngModel)]="sContactnumber" required>                          
+                            </div>
+
+                          <button type="button" class="btn btn-info" style="margin: 20px;" (click)="register()" >Register</button>
+                          
+                          <div class="mb-3" *ngIf="sAuthResponse != ''">
+                              <h5 class="text-danger">{{sAuthResponse}}</h5>
+                          </div>
+
+                          <div class="mb-3">
+                              <a href="/login" style="text-decoration: none;">Have an account ? <span class="text-danger">Login</span></a>
+                          </div>
+
+                        </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+

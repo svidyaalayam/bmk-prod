@@ -1,0 +1,27 @@
+<div class="w3-row">
+
+    <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+
+        <div class="w3-bar w3-light-grey" style="padding-left: 10%; padding-right: 10%;">
+            <button *ngFor="let wsObjs of booklinks; index as i" class="w3-bar-item w3-button w3-mobile" (click)="incrementCounter(i)"><div id="{{ 'wsObjs' + i }}" class="div-telugu20">{{i+1}}) {{wsObjs.titleName}}</div></button>
+          </div>
+
+        <div *ngFor="let wsObjs of booklinks">        
+
+          <div class="w3-bar w3-light-grey" style="padding-left: 10%; padding-right: 10%;">
+         <!--   <button *ngFor="let pdflink of wsObjs.pdfLinks" class="w3-bar-item w3-button w3-mobile" (click)="setLink(pdflink.vlink)"><div class="div-telugu20">{{pdflink.title}}</div></button> -->
+          </div>
+
+        </div>
+    
+    
+    </div>
+
+
+    <div class="w3-col m8 l8 w3-mobile" style="padding: 10px;">
+
+        <iframe [src]="booklinks[currentCount].pdfLink" width="640" height="960" allow="autoplay"></iframe>        
+    
+    </div>
+
+</div>

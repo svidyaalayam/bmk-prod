@@ -1,0 +1,42 @@
+
+
+
+<div class="div-telugu40">తరగతులు</div>
+
+<div class="div-telugu20">శ్రీ బర్మింగ్‌హం వేంకటేశ్వర స్వామి వారి పవిత్ర సన్నిధిలో ప్రారంభింపడిన ఈ తెలుగు పాఠశాలలో తరగతులను, ఆ ఏడుకొండలస్వామి యొక్క ఒక్కొక్క కొండపేరుతో పిలుచుకుంటున్నాము.</div>
+
+<div class="w3-bar w3-light-grey" style="padding-left: 10%; padding-right: 10%;">
+<button *ngFor="let taragati of taragatis; index as i" class="w3-bar-item w3-button w3-mobile" (click)="incrementCounter(i)"><div id="{{ 'taragati' + i }}" class="div-telugu20">{{i+1}}) {{taragati.name}}</div></button>
+</div>
+
+
+<div>
+
+<div class="div-telugu40">{{currentCount+1}}వ తరగతి - {{taragatis[currentCount].name}}</div>
+<div *ngIf="taragatis[currentCount].pathyaamsams.length > 0">
+  <br>
+  <div class="div-telugu30" style="background-color: lightblue">పాఠ్యాంశాలు:</div>
+  <ol style="list-style-type: square; background-color:lightyellow;">
+    <li *ngFor="let pathyaamsam of taragatis[currentCount].pathyaamsams"><div class="div-telugu20">{{pathyaamsam}}</div></li> 
+  </ol>
+</div>
+
+<div *ngIf="taragatis[currentCount].lakshyams.length > 0">
+  <br>
+  <div class="div-telugu30" style="background-color: lightblue">లక్ష్యములు:</div>
+  <ol style="list-style-type: square; background-color:lightyellow;">
+    <li *ngFor="let lakshyam of taragatis[currentCount].lakshyams"><div class="div-telugu20">{{lakshyam}}</div></li> 
+  </ol>  
+</div>
+
+</div>
+
+<br>
+
+<div class="div-telugu30" style="background-color: lightblue">నియమములు:</div>
+
+<ol style="list-style-type: square; background-color:lightyellow;">
+<li><div class="div-telugu20">విద్యార్థులు తప్పని సరిగా 90% తరగతులకు హాజరు కావలెను.</div></li>
+<li><div class="div-telugu20">ఇంటిపని(homework)ని నిర్దేశించిన గడువు సమయములో చేయవలెను.</div></li>
+<li><div class="div-telugu20">పరీక్షలలో ఉపాధ్యాయులు నిర్ణయించిన లక్ష్యములను సాధించిన విద్యార్థులే ఉన్నత తరగతులకు ఉత్తీర్ణులగుదురు.</div></li>
+</ol>

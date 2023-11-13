@@ -1,0 +1,24 @@
+{
+  "projects": {
+    "default": "balamukundamwebapp",
+    "testing": "balamukundamtelugupathasala",
+    "production": "balamukundamwebapp"
+  },
+  "targets": {
+    "balamukundamtelugupathasala": {
+      "hosting": {
+        "bmkapp": [
+          "balamukundamtelugupathasala"
+        ]
+      }
+    },
+    "balamukundamwebapp": {
+      "hosting": {
+        "BalamukundamWebApp": [
+          "balamukundamwebapp.firebaseapp.com"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

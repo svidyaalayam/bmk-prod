@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+  }
+
+  h3, a {    
+    margin: 10px; 
+  }
+
+  p {
+    font-weight: bold;
+    font-size: 1.4em;
+    margin: 10px; 
+  }
+
+  .multiline-text {
+    white-space: pre-line;
+    margin: 25px; 
+  }
