@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {StudentsDataService} from 'src/app/shared/students-data.service';
 import { Userdata } from './model/userdata';
 import { CommonfunctionsService } from 'src/app/shared/commonfunctions.service';
+import { EngToTelService } from 'src/app/shared/eng-to-tel.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class AppComponent {
 
   currentUser: any;
 
-  constructor(private sd : StudentsDataService, private fa: AngularFireAuth, private commFuncs: CommonfunctionsService){
+  constructor(private sd : StudentsDataService, private fa: AngularFireAuth, private sEngToTel: EngToTelService, private commFuncs: CommonfunctionsService){
   }
 
   ngOnInit(): void{
@@ -75,8 +76,7 @@ export class AppComponent {
   }
 
   testUser(){
-    console.log("This user:");
-    console.log(this.currentUser);
+
   }
 
   myFunctionMobile(){

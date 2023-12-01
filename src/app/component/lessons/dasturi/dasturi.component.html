@@ -1,1 +1,118 @@
-<p>dasturi works!</p>
+<div class="w3-row" >
+    <div class="w3-col m8 l8 w3-mobile" style="padding: 10px;">
+        <div class="div-telugu30" style="background-color: lightblue">English:</div>
+        <textarea rows="16" cols="0" id="englishTextArea" (keyup)="showTelugu()" spellcheck="false" autocorrect="off" autocapitalize="off" style="width:100%" placeholder="mee telugu sandeaSam, ingleeshu spellingulatoa"></textarea>
+        
+        <br>
+        <div style="padding: 10px; font-family: 'mTelFnt1'; font-size: 20px;">
+            <div class="div-telugu30" style="background-color: lightslategray">Telugu:</div>
+            <textarea  rows="16" cols="0" id="teluguTextArea" spellcheck="false" autocorrect="off" autocapitalize="off" style="width:100%">శ్రీ రామ జయరామ జయజయ రామ</textarea>
+
+        </div>
+    </div>
+
+    <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+        <div class="div-telugu30" style="background-color: lightpink">Help:     
+            <div>
+                <table class="help-board">
+                    <tbody>
+                        <tr>
+                            <td><div class="btext">అ</div><div class="stext">a</div></td>
+                            <td><div class="btext">ఆ</div><div class="stext">A,aa</div></td>
+                            <td><div class="btext">ఇ</div><div class="stext">i</div></td>
+                            <td><div class="btext">ఈ</div><div class="stext">I,ii,ee</div></td>
+                            <td><div class="btext">ఉ</div><div class="stext">u</div></td>
+                            <td><div class="btext">ఊ</div><div class="stext">U,uu,oo</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">ఋ</div><div class="stext">R</div></td>
+                            <td><div class="btext">ౠ</div><div class="stext">F,Ru</div></td>
+                            <td><div class="btext">ఌ</div><div class="stext">z</div></td>
+                            <td><div class="btext">ౡ</div><div class="stext">Z,zu</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">ఎ</div><div class="stext">e</div></td>
+                            <td><div class="btext">ఏ</div><div class="stext">E,ea</div></td>
+                            <td><div class="btext">ఐ</div><div class="stext">Y,ai</div></td>
+                            <td><div class="btext">ఒ</div><div class="stext">o</div></td>
+                            <td><div class="btext">ఓ</div><div class="stext">O,oe</div></td>
+                            <td><div class="btext">ఔ</div><div class="stext">W,au,ou</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">అం</div><div class="stext">aM</div></td>
+                            <td><div class="btext">అఁ</div><div class="stext">ax</div></td>
+                            <td><div class="btext">అః</div><div class="stext">a@h</div></td>
+                            <td><div class="btext">అఽ</div><div class="stext">aX</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="help-board">
+                    <tbody>
+                        <tr>
+                            <td><div class="btext">క</div><div class="stext">k</div></td>
+                            <td><div class="btext">ఖ</div><div class="stext">K,kh</div></td>
+                            <td><div class="btext">గ</div><div class="stext">g</div></td>
+                            <td><div class="btext">ఘ</div><div class="stext">G,gh</div></td>
+                            <td><div class="btext">ఙ</div><div class="stext">~m</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">చ</div><div class="stext">c,ch</div></td>
+                            <td><div class="btext">ౘ</div><div class="stext">~c</div></td>
+                            <td><div class="btext">ఛ</div><div class="stext">C,Ch</div></td>
+                            <td><div class="btext">జ</div><div class="stext">j</div></td>
+                            <td><div class="btext">ౙ</div><div class="stext">~j</div></td>
+                            <td><div class="btext">ఝ</div><div class="stext">J</div></td>
+                            <td><div class="btext">ఞ</div><div class="stext">~n</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">ట</div><div class="stext">T</div></td>
+                            <td><div class="btext">ఠ</div><div class="stext">Th</div></td>
+                            <td><div class="btext">డ</div><div class="stext">D</div></td>
+                            <td><div class="btext">ఢ</div><div class="stext">Dh</div></td>
+                            <td><div class="btext">ణ</div><div class="stext">N</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">త</div><div class="stext">t</div></td>
+                            <td><div class="btext">థ</div><div class="stext">th</div></td>
+                            <td><div class="btext">ద</div><div class="stext">d</div></td>
+                            <td><div class="btext">ధ</div><div class="stext">dh</div></td>
+                            <td><div class="btext">న</div><div class="stext">n</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">ప</div><div class="stext">p</div></td>
+                            <td><div class="btext">ఫ</div><div class="stext">P,f,ph</div></td>
+                            <td><div class="btext">బ</div><div class="stext">b</div></td>
+                            <td><div class="btext">భ</div><div class="stext">B,bh</div></td>
+                            <td><div class="btext">మ</div><div class="stext">m</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">య</div><div class="stext">y</div></td>
+                            <td><div class="btext">ర</div><div class="stext">r</div></td>
+                            <td><div class="btext">ల</div><div class="stext">l</div></td>
+                            <td><div class="btext">వ</div><div class="stext">v,w</div></td>
+                            <td><div class="btext">శ</div><div class="stext">S</div></td>
+                            <td><div class="btext">ష</div><div class="stext">sh</div></td>
+                            <td><div class="btext">స</div><div class="stext">s</div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btext">హ</div><div class="stext">H</div></td>
+                            <td><div class="btext">ళ</div><div class="stext">L,lh</div></td>
+                            <td><div class="btext">క్ష</div><div class="stext">ksh</div></td>
+                            <td><div class="btext">ఱ</div><div class="stext">~r</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="help-board">
+                    <tbody>
+                        <tr>
+                            <td><div class="btext">్</div><div class="stext">పొల్లు<br>^</div></td>
+                            <td><div class="btext">॒</div><div class="stext">అనుదాత్తము<br>q</div></td>
+                            <td><div class="btext"> ॑</div><div class="stext">ఉదాత్తము<br>Q</div></td>
+                            <td><div class="btext"> ᳚</div><div class="stext">స్ఫురితము<br>V</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

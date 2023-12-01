@@ -1,1 +1,42 @@
-<p>poems works!</p>
+
+
+<div class="w3-row">
+    <div class="w3-col w3-container s12 m6 l6" >
+        <div  class="w3-bar w3-light-grey w3-row" >
+            <div class="div-telugu20" style="background-color: lightblue; padding: 20px;">
+            <label for="editMode">Select:</label>
+            <select id="editMode" (change)="applySelectedLesson()">
+            <option *ngFor="let mgroupOfPoems of listOfPoems; index as i" value={{i}} >{{i+1}}) {{mgroupOfPoems.groupName}}</option>        
+            </select>  
+            </div>            
+        </div>        
+    </div>
+
+    <div class="w3-col w3-container s12 m6 l6" >
+        <div  class="w3-bar w3-light-grey w3-row" >
+            <div class="div-telugu20" style="background-color: lightblue; padding: 20px;">
+            <label for="editMode2">Select:</label>
+            <select id="editMode2" (change)="applySelectedItem()">
+            <option *ngFor="let mgroupItems of selectedGroup.groupItems; index as i" value={{i}} >{{i+1}}) {{mgroupItems.collectionName}}</option>        
+            </select>  
+            </div>            
+        </div>        
+    </div>
+
+</div>
+
+
+<br>
+
+<div class="w3-bar w3-light-grey" style="padding-left: 10%; padding-right: 10%;">
+    <button *ngFor="let mpoemDetails of selectedCollection.poemDetails; index as j" class="w3-bar-item w3-button w3-mobile" (click)="incrementCounter(j)"><div class="div-telugu20">{{j+1}}) {{mpoemDetails.title}}</div></button>
+</div>
+
+<br>
+
+<div *ngIf="selectedPoem.poemLines.length > 0" style="background-color:lightyellow;">
+    <br>
+      <div *ngFor="let poemLine of selectedPoem.poemLines" class="div-telugu20" style="font-size:2vw; padding-left: 20px; line-height: 2.0;">{{poemLine}}</div>
+</div>
+
+

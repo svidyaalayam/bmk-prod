@@ -82,6 +82,14 @@
               <option *ngFor="let bmkStudent of bmkStudents" [value]="bmkStudent.loginid">{{bmkStudent.name}} {{bmkStudent.surname}} [{{bmkStudent.loginid}}]</option>
             </select>
           </div>
+          <div class="input-group mb-3">
+            <label for="email" style="padding-left: 5px; "> Enter Email-id of student</label>  
+            <input type="text" class="form-control" id="email" [(ngModel)]="selectedStudentID" (keyup.enter)="onStudentSelectionChangeToAddUser()">
+
+
+          </div>
+          
+          
           
           <div class="col-md-8">
             <div class="input-group mb-3" *ngIf="selectedStudentID !== '' && IsStudentAdded()">

@@ -34,7 +34,6 @@ export class TeacherclasesComponent {
   selectedClassStudentsData: any [] = [];
 
   onClassDataSelected(iRow: number): void {
-    console.log('Teachers32');
     this.selectedClassIndex = iRow;  
     if(this.usersClassData.length > 0)
     {
@@ -52,17 +51,19 @@ export class TeacherclasesComponent {
     let teacherEmail : string = ''+this.bmkuser.loginid;
 
     this.sd.getAllClassesForTeacher(teacherEmail).subscribe(userClasses => {
-      this.usersClassData = [];
+      let thisTeacherClassDta : any = [];
+      
       this.userClassesRelData = userClasses;
       userClasses.forEach(userClass => {
         if(userClass.enddate == ''){
           this.sd.GetClassWithID(userClass.classid).then(res => {
-              this.usersClassData.push(res)});
+            thisTeacherClassDta.push(res)});
               this.onClassDataSelected(0);
               this.getTeachers();  
               this.getStudents();     
         }              
       }) 
+      this.usersClassData = thisTeacherClassDta;
       this.userClassText = (userClasses.length == 0) ? "You are not assigned to any class." : "You are assigned to following classes";
       
     });   
@@ -83,7 +84,6 @@ export class TeacherclasesComponent {
   }
 
   getStudents(): void{
-    console.log("adss");
     this.sd.getAllUsersForClass(this.userClassesRelData[this.selectedClassIndex].classid).subscribe(teachers => {
       let thisClassTeachers: any[]= [];
       teachers.forEach(teacher => {
@@ -93,7 +93,6 @@ export class TeacherclasesComponent {
         );
       });
       this.selectedClassStudentsData = thisClassTeachers;   
-      console.log(this.selectedClassStudentsData) ;
     });
     
   }

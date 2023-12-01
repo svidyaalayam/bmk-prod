@@ -1,0 +1,15 @@
+.container {
+    overflow: hidden; /* Clear the float */
+  }
+
+  .content {
+    float: left;
+    width: 50%; /* Adjust the width as needed */
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+  .image {
+    float: right;
+    width: 50%; /* Adjust the width as needed */
+  }

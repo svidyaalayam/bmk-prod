@@ -57,7 +57,6 @@ export class RegstudentComponent {
   }
 
   getCourses():void{
-    console.log("getting cources")
     this.sClassesOffered = new CoursesService().sClassesStudents;
   }
 

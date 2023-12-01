@@ -1,0 +1,13 @@
+.btnLesson {
+    background-color: lightblue; /* Green */
+    border: none;
+    color: blue;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px;
+    font-family: 'mTelFnt1';
+    font-size: 28px;
+    line-height: 1.5;
+  }

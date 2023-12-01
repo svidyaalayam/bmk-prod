@@ -1,0 +1,129 @@
+
+.chess-board { border-spacing: 0; border-collapse: collapse; text-align: center; white-space:nowrap;}
+
+.chess-board td { border: 1px solid; width: 2em; max-width: 2em; position: relative;}
+.chess-board tr { border: 1px solid; height: 2em;  }
+.chess-board .light { background: #eee;   }
+.chess-board .dark { background: #000;  }
+
+.divrelative {
+  position: relative;
+  height: 100%;
+} 
+
+.absoluteTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 12px;
+}
+.absoluteBot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 12px;
+}
+.blueText {
+  color: blue;
+}
+.redText {
+  color: red;
+}
+
+
+
+.btnLesson {
+background-color: lightblue; /* Green */
+border: none;
+color: blue;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+padding: 0px 0px 0px 0px;
+font-family: 'mTelFnt1';
+font-size: 28px;
+}
+
+.btnLtter {
+background-color: lightblue; 
+border:1px solid #4CAF50;
+color: red;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+padding: 1px 2px 1px 2px;
+font-family: 'mTelFnt1';
+font-size: 40px;
+}
+
+.card {
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+max-width: 600px;
+margin: auto;
+text-align: center;
+font-family: arial;
+}
+
+@media only screen and (max-width: 900px) {
+
+.btnLesson {
+background-color: lightblue; /* Green */
+border: none;
+color: blue;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+padding: 0px 0px 0px 0px;
+font-family: 'mTelFnt1';
+font-size: 21px;
+}
+
+.btnLtter {
+background-color: lightblue; 
+border:1px solid #4CAF50;
+color: red;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+padding: 1px 2px 1px 2px;
+font-family: 'mTelFnt1';
+font-size: 24px;
+}
+
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+.btnLesson {
+background-color: lightblue; /* Green */
+border: none;
+color: blue;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+padding: 0px 0px 0px 0px;
+font-family: 'mTelFnt1';
+font-size: 14px;
+}
+
+.btnLtter {
+background-color: lightblue; 
+border:1px solid #4CAF50;
+color: red;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+padding: 1px 2px 1px 2px;
+font-family: 'mTelFnt1';
+font-size: 18px;
+}
+
+}

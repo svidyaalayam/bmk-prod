@@ -30,7 +30,6 @@ export class ClassusersService {
 
   // Create
   async createClassUsers(data: any): Promise<any> {
-    console.log(data);
     if(data.dataId !==''){
       return await setDoc(doc(getFirestore(this.fbap), 'classusers', data.dataId), data);
     }

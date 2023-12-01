@@ -16,6 +16,7 @@
     <button type="button" class="primary-button" *ngIf="bValidAdmin" (click)="nShowTheTab = 32">Users Management</button>
     <button type="button" class="primary-button" *ngIf="bValidAdmin" (click)="nShowTheTab = 33">Classes Management</button>
 
+
   </div>
 
   
@@ -28,21 +29,26 @@
       <app-studentclases *ngIf="nShowTheTab==11" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-studentclases>
       <app-teacherclases *ngIf="nShowTheTab==21" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-teacherclases>
 
-      <app-studentcalander *ngIf="nShowTheTab==12" [bmkuser]="bmkuser"></app-studentcalander>
-      <app-teachercalander *ngIf="nShowTheTab==22" [bmkuser]="bmkuser"></app-teachercalander>
+      <app-studentcalander *ngIf="nShowTheTab==12" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-studentcalander>
+      <app-teachercalander *ngIf="nShowTheTab==22" [bmkuser]="bmkuser" (dataEvent)="receiveDataFromChild($event)"></app-teachercalander>
       
       <app-checkusers *ngIf="nShowTheTab==32"></app-checkusers>
       <app-classlist *ngIf="nShowTheTab==33"></app-classlist>
+
+
+      
           
     </div>  
     <br>   
   </div>
 
-  
-
-
 </div>
 <div *ngIf="nShowTheTab>0">
   <button type="button" class="primary-button"  (click)="nShowTheTab = 0">Back to Home Page</button>
 </div>
+
+
+
+
+
 

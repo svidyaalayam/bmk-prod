@@ -57,6 +57,11 @@ import { TeacherDataComponent } from './component/teacher/teacher-data/teacher-d
 import { TeacherclasesComponent } from './component/teacher/teacherclases/teacherclases.component';
 import { TeachercalanderComponent } from './component/teacher/teachercalander/teachercalander.component';
 import { StudentcalanderComponent } from './component/student/studentcalander/studentcalander.component';
+import { VerbsComponent } from './component/sanskrit/verbs/verbs.component';
+import { NounsComponent } from './component/sanskrit/nouns/nouns.component';
+import { SentencesComponent } from './component/sanskrit/sentences/sentences.component';
+import { IgcseComponent } from './component/sanskrit/igcse/igcse.component';
+import { EpicsComponent } from './component/sanskrit/epics/epics.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +108,11 @@ import { StudentcalanderComponent } from './component/student/studentcalander/st
     TeacherclasesComponent,
     TeachercalanderComponent,
     StudentcalanderComponent,
+    VerbsComponent,
+    NounsComponent,
+    SentencesComponent,
+    IgcseComponent,
+    EpicsComponent,
   ],
   imports: [
     BrowserModule,

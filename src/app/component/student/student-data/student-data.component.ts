@@ -8,7 +8,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CommonfunctionsService } from 'src/app/shared/commonfunctions.service';
 import { Router } from '@angular/router';
 
-
+//<app-dashboard *ngIf="nShowTheTab==0"></app-dashboard>
 
 @Component({
   selector: 'app-student-data',
@@ -117,7 +117,6 @@ export class StudentDataComponent {
             this.bValidAdmin = false;
           }
           else if (!student.accepted){  
-            console.log("Student not accepted");
             this.welcomeData.sMessages = [];         
             this.welcomeData.sMessages.push({warn: false, msg: "Thanks for registering with Balamukundam."});
             this.welcomeData.sMessages.push({warn: true, msg: 'Our Admin team are verifying your details.'});

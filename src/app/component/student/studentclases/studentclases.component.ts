@@ -28,15 +28,13 @@ export class StudentclasesComponent {
   selectedClassIndex: number = -1;
 
   selectedClassTeachersData: any [] = [];
-  selectedClassStudentsData: any [] = [];
+
 
   onClassDataSelected(iRow: number): void {
-    console.log('Teachers32');
     this.selectedClassIndex = iRow;  
     if(this.usersClassData.length > 0)
     {
-      this.getTeachers(); 
-      this.getStudents();   
+      this.getTeachers();   
     }
     
   }
@@ -52,8 +50,7 @@ export class StudentclasesComponent {
           this.sd.GetClassWithID(userClass.classid).then(res => {
               this.usersClassData.push(res)});
               this.onClassDataSelected(0);
-              this.getTeachers();  
-              this.getStudents();     
+              this.getTeachers();      
         }              
       }) 
       this.userClassText = (userClasses.length == 0) ? "You are not assigned to any class." : "You are assigned to following classes";
@@ -74,20 +71,4 @@ export class StudentclasesComponent {
     });
     
   }
-
-  getStudents(): void{
-    console.log("adss");
-    this.sd.getAllUsersForClass(this.userClassesRelData[this.selectedClassIndex].classid).subscribe(teachers => {
-      let thisClassTeachers: any[]= [];
-      teachers.forEach(teacher => {
-        this.sd.GetStudent(teacher.loginid).then(res => {
-          thisClassTeachers.push({'docID': teacher.dataId, 'teacher' : res});
-        }        
-        );
-      });
-      this.selectedClassStudentsData = thisClassTeachers;    
-    });
-    
-  }
-  
 }

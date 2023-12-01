@@ -283,6 +283,8 @@ export class ClasslistComponent {
         dataId : '',
         classid : this.selectedClass.classid,
         scheduledate : this.selectedDate,
+        classwork : '',
+        homework : ''
       }
       this.csched.createClassSchedule(aSchedule).then(() => {
         this.getSchedules();
@@ -299,6 +301,8 @@ export class ClasslistComponent {
           dataId : '',
           classid : this.bmkClasses[this.copyingId].classid,
           scheduledate : schedule.scheduledate,
+          classwork : '',
+          homework : ''
         }
         this.csched.createClassSchedule(aSchedule).then(() => {
           this.copyingId = 0;

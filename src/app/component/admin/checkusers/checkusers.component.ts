@@ -190,12 +190,6 @@ export class CheckusersComponent {
   }
 
 
-
-  getUsers():void{
-    this.sd.getAllUsers().subscribe(users => {this.users = users; this.filteredusers = users});        
-  }
-
-
   getUserWithEmail(userEmail: string):void{
     this.searchResult = 'User not found with the email.'
     this.sd.GetStudent(userEmail.toLowerCase()).then(res => {this.selectedUser = res;
@@ -229,7 +223,7 @@ export class CheckusersComponent {
       this.IsEditable = false;
       this.strInactiveCmdTitle = (this.selectedUser?.accountsuspended)? 'Activate User' : 'Suspend User';
       if(this.selectedUser?.accepted) this.IsInactivateRequired = true;
-      console.log('Accepted: ' + this.selectedUser?.accepted);})
+      })
 
    }
 
@@ -247,15 +241,6 @@ export class CheckusersComponent {
    this.IsEditable = true;
   }
 
-  updateUser(): void {
-    if (this.selectedUser) {
-      // Logic to update the selected user
-      console.log('Updated user:', this.selectedUser);
-    } else {
-      console.log('No user selected.');
-    }
-  }
-
   cancelForm() {
     this.selectedUser = null;
     this.IsEditable = false;
@@ -265,7 +250,6 @@ export class CheckusersComponent {
 
   onSubmit(): void {
     this.sd.create(this.selectedUser).then(() => {
-      console.log('Data updated to database successfully!');
       this.selectedUser = null;
       this.IsEditable = false;
       this.openActivate = false;

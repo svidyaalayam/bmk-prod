@@ -21,21 +21,83 @@
         
       <h2>Class Calendar</h2>
 
-      <table class="table table-hover" *ngIf="selectedClassSchedules.length > 0" >
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="selectedFilterOption" (change)="onFilterSelectionChange()">
+          <option *ngFor="let filterOpt of filterOptions" [value]="filterOpt">{{filterOpt}}</option>
+        </select>
+      </div>
+
+      <table class="table table-hover" *ngIf="selectedClassSchedulesToTable.length > 0 && selectedFilterOption != 'Select a Class Session'" >
         <thead>
           <tr>
             <th>Sl. No.</th>
             <th>Date</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
   
-          <tr *ngFor="let selectedClassSchedule of selectedClassSchedules; let i = index" (click)="selectedDate = selectedClassSchedule.scheduledate" [class.table-primary]="selectedClassSchedule.classid === selectedDate">
-            <td>{{i+1}}</td>
-            <td>{{ formatDateInternational(selectedClassSchedule.scheduledate) }}</td>              
-          </tr>
+          <tr *ngFor="let selectedClassSchedule of selectedClassSchedulesToTable; let i = index" (click)="OnSelectSchedule(selectedClassSchedule.schedule)" [class.table-primary]="selectedClassSchedule.schedule.scheduledate === selectedDate">
+            <td>{{selectedClassSchedule.SlNo}}</td>
+            <td>{{ formatDateInternational(selectedClassSchedule.schedule.scheduledate) }}</td>              
+            <td *ngIf="selectedClassSchedule.SlNo==previousClassNumber+1">Previous Class</td>
+            <td *ngIf="selectedClassSchedule.SlNo==nextClassNumber+1">Next Class</td>
+            <td *ngIf="selectedClassSchedule.SlNo!=nextClassNumber+1 && selectedClassSchedule.SlNo!=previousClassNumber+1"></td>
+        </tr>
         </tbody>
       </table>
+
+      <div *ngIf="selectedSchedule">
+
+        <h2 >Session on Date : {{formatDateInternational(selectedSchedule.scheduledate)}}</h2>
+
+        <div *ngIf="bShowSelectedSchedules">
+        
+    
+          <div class="mb-3">
+              <label for="classwork" >Class Work:</label>
+              <textarea class="form-control" data-gramm="false" name="classwork" [(ngModel)]="selectedSchedule.classwork" rows="4"></textarea>                       
+          </div>
+
+          <div class="mb-3">
+              <label for="homework" >Home Work:</label>
+              <textarea class="form-control" data-gramm="false" name="homework" [(ngModel)]="selectedSchedule.homework" rows="4"></textarea>                       
+          </div>
+
+          <button type="button" class="btn btn-outline-primary me-1" (click)="updateData()">Save</button>
+          <button type="button" class="btn btn-outline-danger me-5" (click)="cancelData()">Cancel</button>
+          <h5>Please note: This Save button will save only only the Class work and Home work. This will not save attendance. For attendance you need to save for each student.</h5>
+        
+
+          <div *ngIf="canTakeAttendance()" class="mb-3">
+            <button  type="button" class="btn btn-outline-primary me-1" (click)="takeAttendance()">Show Attendance</button>
+            <h5>Please note: First time when creating attendance for the schedule date, the students list may not appear immediately. You may have to reselect the session date.</h5>
+   
+          </div>
+          
+          
+          <div *ngIf="attendanceCreated">
+            <h3>Attendance : {{getAtendance()}}</h3>
+
+            <div *ngFor="let selectedClassStudentData of selectedClassStudentsData">
+
+              <div class="input-group mb-3" style="margin-top: 20px;">
+                <input  type="checkbox" id="authorised" [(ngModel)]="selectedClassStudentData.open" >
+                <label for="authorised" style="padding-left: 5px; padding-right: 10px">{{ selectedClassStudentData.student.name }} {{ selectedClassStudentData.student.surname }}</label>  
+                <label *ngIf="selectedClassStudentData.schedule.present=='Unauthorised Absent'" for="authorised" style="background-color: lightcoral; "> [ {{ selectedClassStudentData.schedule.present }} ]</label>  
+                <label *ngIf="selectedClassStudentData.schedule.present=='Authorised Absent'" for="authorised" style="background-color: yellow; "> [ {{ selectedClassStudentData.schedule.present }} ]</label>  
+                <label *ngIf="selectedClassStudentData.schedule.present=='Present'" for="authorised" style="background-color: lightgreen; "> [ {{ selectedClassStudentData.schedule.present }} ]</label>  
+                
+              </div>
+              <app-studentattendance *ngIf="selectedClassStudentData.open" [dataFromParent]="selectedClassStudentData" ></app-studentattendance>
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
 
     </div>
 </div>

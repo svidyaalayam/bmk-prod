@@ -1,0 +1,141 @@
+
+<div class="w3-row">
+
+    <div class="w3-row">
+
+        <div class="w3-col col-md-4" >
+            <select class="form-select sabdams" style="font-size: 20px;" [(ngModel)]="selectedVerb" (change)="getAverb()">
+              <option *ngFor="let filterVerb of verbsList" [value]="filterVerb">{{filterVerb}} ({{getVerbMeaning()}})</option>
+            </select>
+        </div>
+
+        <Div class="w3-col col-md-4">
+            <h2 style="font-family:mHindiFnt3; text-align: center;">Verb: {{selectedVerb}} धातु रूप ( {{getVerbMeaning()}} )</h2>
+        </Div>
+        
+        <div class="w3-col col-md-4" >
+            <select class="form-select sabdams" style="font-size: 20px;" [(ngModel)]="gameSeleted" (change)="getAverb()">
+              <option *ngFor="let qOption of qOptions" [value]="qOption.val">{{qOption.des}}</option>
+            </select>
+        </div>
+
+    </div>
+    
+    
+
+    
+
+    <button type="button" class="btn btn-outline-primary me" (click)="createAQuestion()">Try another sentence to translate</button>
+
+
+    <div class="welcome-message radio-group">
+
+        <h2>{{getQuestion()}}</h2>
+
+        <div style="margin: 20px;" *ngFor="let wrongAnswer of getAnswers()">
+            <input class="form-check-input" type="radio" name="options" [value]="wrongAnswer" [(ngModel)]="selectedOption">
+            <label  style="margin-left: 10px; margin-top: 5px" class="form-check-label" for="boy">{{ wrongAnswer }}</label>   
+        </div>
+        <button type="button" class="btn btn-outline-primary me" (click)="onSelectionChange()">Test Answer</button>
+
+        <h3 *ngIf="bWrongAnswer" style="color: red;">{{AnswerComment}}</h3>
+        <h3 *ngIf="!bWrongAnswer" style="color: green;">{{AnswerComment}}</h3>
+
+        <h3>Score = {{nScoreCount}} / {{nQuestionsCount}}</h3>
+
+    </div>
+
+    <h3>See below tables for help</h3>
+
+    <h3>1st, 2nd, 3rd Persons</h3>
+    <div class="w3-row">
+        
+        <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+            
+            <table class="sabdams first-column" >
+                <colgroup>
+                    <col style = "width: 20%; min-width: 20%;">
+                    <col style = "width: auto; min-width: min-content;">
+                </colgroup>
+                <thead>
+                <tr>
+                <th></th>
+                <th>एकवचनम्‌ (Singular)</th>
+                <th>द्विवचनम्‌ (Dual)</th>
+                <th>बहुवचनम्‌ (Plural)</th>
+                </tr>
+                </thead>
+                <tr *ngFor="let rowdata of personTable; index as i">
+                    <td style="font-size: 12px;">{{rowdata.eng[0]}}</td>
+                    <td style="font-size: 16px;" *ngFor="let data1 of rowdata.data; index as j" (click)="onPersonSelected(i,j)" [ngClass]="{'cellSelected' : (selectedI == i || (selectedI==2 && i<2))  && selectedJ == j}">{{data1}} </td>
+                </tr> 
+            </table>
+        </div>
+    </div> 
+
+    <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+        <h3>Present Tense (लट् लकार)</h3>
+        <table class="sabdams first-column" >
+            <colgroup>
+                <col style = "width: 20%; min-width: 20%;">
+                <col style = "width: auto; min-width: min-content;">
+            </colgroup>
+            <thead>
+            <tr>
+            <th></th>
+            <th>एकवचनम्‌ (Singular)</th>
+            <th>द्विवचनम्‌ (Dual)</th>
+            <th>बहुवचनम्‌ (Plural)</th>
+            </tr>
+            </thead>
+            <tr *ngFor="let rowdata of dataToDispy.present; index as i">
+                <td style="font-size: 12px;">{{sContext[i]}}</td>
+                <td style="font-size: 16px;" *ngFor="let titleName of rowdata; index as j" (click)="onVerbCaseSelected(1,i+2,j)" [ngClass]="{'cellSelected' : selectedTense == 1 && selectedI == i+2 && selectedJ == j}">{{titleName}} </td>
+            </tr> 
+        </table>
+    </div>
+
+    <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+        <h3>Future Tense (लृट् लकार)</h3>
+        <table class="sabdams first-column" >
+            <colgroup>
+                <col style = "width: 20%; min-width: 20%;">
+                <col style = "width: auto; min-width: min-content;">
+            </colgroup>
+            <thead>
+            <tr>
+            <th></th>
+            <th>एकवचनम्‌ (Singular)</th>
+            <th>द्विवचनम्‌ (Dual)</th>
+            <th>बहुवचनम्‌ (Plural)</th>
+            </tr>
+            </thead>
+            <tr *ngFor="let rowdata of dataToDispy.future; index as i">
+                <td style="font-size: 12px;">{{sContext[i]}}</td>
+                <td style="font-size: 16px;" *ngFor="let titleName of rowdata; index as j" (click)="onVerbCaseSelected(2,i+2,j)" [ngClass]="{'cellSelected' : selectedTense == 2 && selectedI == i+2 && selectedJ == j}">{{titleName}} </td>
+            </tr> 
+        </table>
+    </div>
+
+    <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+        <h3>Past Tense (लङ् लकार)</h3>
+        <table class="sabdams first-column" >
+            <colgroup>
+                <col style = "width: 20%; min-width: 20%;">
+                <col style = "width: auto; min-width: min-content;">
+            </colgroup>
+            <thead>
+            <tr>
+            <th></th>
+            <th>एकवचनम्‌ (Singular)</th>
+            <th>द्विवचनम्‌ (Dual)</th>
+            <th>बहुवचनम्‌ (Plural)</th>
+            </tr>
+            </thead>
+            <tr *ngFor="let rowdata of dataToDispy.past; index as i">
+                <td style="font-size: 12px;">{{sContext[i]}}</td>
+                <td style="font-size: 16px;" *ngFor="let titleName of rowdata; index as j" (click)="onVerbCaseSelected(3,i+2,j)" [ngClass]="{'cellSelected' : selectedTense == 3 && selectedI == i+2 && selectedJ == j}">{{titleName}} </td>
+            </tr> 
+        </table>
+    </div>
+</div>

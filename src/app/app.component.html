@@ -47,11 +47,24 @@
         <a routerLink="fruitsgame" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Fruits & Vegitables</a> 
       </div>
     </div>
+
+    <div class="w3-dropdown-hover  w3-hide-small">
+      <!--<button class="w3-button" *ngIf="isLoggedIn$ | async">Lessons</button>-->
+      <button class="w3-button">Sanskrit</button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a routerLink="sabdams" class="w3-bar-item w3-button">Vibhaktis</a>
+        <!--<a routerLink="snouns" class="w3-bar-item w3-button">Nouns</a> -->
+        <a routerLink="sverbs" class="w3-bar-item w3-button">Verbs</a> 
+        <a routerLink="igcse" class="w3-bar-item w3-button">IGCSE</a> 
+        <!--<a routerLink="ssentences" class="w3-bar-item w3-button">Sentences</a> -->
+      </div>
+    </div>
+
     <div class="w3-dropdown-hover  w3-hide-small">
       <!--<button class="w3-button" *ngIf="isLoggedIn$ | async">Resources</button>-->
-      <button class="w3-button"  *ngIf="isStudent$ || isTeacher$">Resources</button>
+      <button class="w3-button" >Resources</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a routerLink="media" class="w3-bar-item w3-button"  *ngIf="isStudent$ || isTeacher$">Media</a>
+        <a routerLink="media" class="w3-bar-item w3-button">Media</a>
         <a routerLink="poems" class="w3-bar-item w3-button"  *ngIf="isStudent$ || isTeacher$">Padyamulu</a>
         <a routerLink="padamulu" class="w3-bar-item w3-button"  *ngIf="isStudent$ || isTeacher$">Gadinudi</a>      
          
@@ -83,8 +96,7 @@
         <a routerLink="telwords" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Padamulu</a>      
         <a routerLink="dasturi" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Dasturi</a>
         <a routerLink="books" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Books</a>
-        <a routerLink="grammer" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">VyaakaraNamu</a>
-        <a routerLink="sabdams" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Sanskrit Vibhaktis</a> 
+        <a routerLink="grammer" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">VyaakaraNamu</a>         
         <a routerLink="worksheets" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Worksheets</a>
       </div>
     </div>
@@ -99,11 +111,23 @@
         <a routerLink="fruitsgame" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Fruits & Vegitables</a>
       </div>
     </div>
+
+    <div class="w3-dropdown-hover  ">
+      <button class="w3-button">Sanskrit</button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a routerLink="sabdams" class="w3-bar-item w3-button">Vibhaktis</a>
+        <!--<a routerLink="snouns" class="w3-bar-item w3-button">Nouns</a> -->
+        <a routerLink="sverbs" class="w3-bar-item w3-button">Verbs</a> 
+        <a routerLink="igcse" class="w3-bar-item w3-button">IGCSE</a> 
+        <!--<a routerLink="ssentences" class="w3-bar-item w3-button">Sentences</a> -->
+      </div>
+    </div>
+
     <div class="w3-dropdown-hover  ">
       <!--<button class="w3-button" *ngIf="isLoggedIn$ | async">Resources</button>-->
       <button class="w3-button">Resources</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">      
-        <a routerLink="media" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Media</a>
+        <a routerLink="media" class="w3-bar-item w3-button">Media</a>
         <a routerLink="poems" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Padyamulu</a>
         <a routerLink="padamulu" class="w3-bar-item w3-button" *ngIf="isStudent$ || isTeacher$">Gadinudi</a>
         

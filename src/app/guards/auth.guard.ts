@@ -3,8 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
- // console.log(route.url);
- // console.log(state.url);
+
  const aService = inject(AuthService);
 
  switch (state.url) {
@@ -28,6 +27,8 @@ export const authGuard: CanActivateFn = (route, state) => {
   case '/worksheets':
   case '/grammer':
   case '/books':
+  case '/telwords':
+  case '/padamulu':
         return aService.getUserType() == 0 || aService.getUserType() == 1 ;
 
 

@@ -1,1 +1,49 @@
-<p>studentattendance works!</p>
+<div class="card mb-3" >
+    <div class="card-body" >
+      <div class="row" >
+          <div class="col-md-9">
+              <h3 class="card-title">{{ dataFromParent.student.name }} {{ dataFromParent.student.surname }}</h3>
+              <p *ngIf="dataFromParent.schedule.reasonAbsent!==''">
+                Applying for holiday : {{dataFromParent.schedule.reasonAbsent}}
+              </p>
+              <div class="mb-3">
+                <label for="teachername">Attendance:</label>
+                <select class="form-select" [(ngModel)]="dataFromParent.schedule.present" name="teachername" (change)="true">
+                  <option *ngFor="let attendanceOption of attendanceOptions" [value]="attendanceOption">{{attendanceOption}}</option>
+                </select>
+              </div>
+
+              <p *ngIf="!dataFromParent.schedule.classworkunderstand" style="color: red;">
+                Student not confirmed if understand the lessons.
+              </p>
+
+              <p *ngIf="!dataFromParent.schedule.homeworksubmitted" style="color: red;">
+                Student not confirmed if submited homework.
+              </p>             
+
+          </div>
+
+          <div class="col-md-3" >
+              <img class="card-img-right" style="height: auto; width: 120px;" src={{dataFromParent.student.photourl}} alt="Card image cap">
+          </div>
+      </div>
+
+      <div>
+        <div class="mb-3">
+            <label for="classwork" >Student's homework & comments:</label>
+            <textarea class="form-control" readonly="true" data-gramm="false" name="classwork" [(ngModel)]="dataFromParent.schedule.studentcomment" rows="4"></textarea>                       
+          </div>
+          
+
+          <div class="mb-3">
+            <label for="classwork" >Teacher's comments & feedback:</label>
+            <textarea class="form-control" data-gramm="false" name="classwork" [(ngModel)]="dataFromParent.schedule.teachercomment" rows="4"></textarea>                       
+          </div>
+      </div>
+
+      <button type="button" class="btn btn-outline-primary me-1" (click)="updateData()">Save : Attendance & feedback for {{ dataFromParent.student.name }} </button>
+        
+      
+      
+    </div>
+  </div>

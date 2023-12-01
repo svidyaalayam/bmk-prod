@@ -1,1 +1,85 @@
-<p>padamulu works!</p>
+<div>
+
+    <ng-container  *ngIf="sListGadiNudi">
+
+        <div>
+            <label for="editMode">Select:</label>
+            <select id="editMode" (change)="OpenFromServer()">
+            <option *ngFor="let oGD of sListGadiNudi" value={{oGD.GadiNudiID}} >{{oGD.GadiNudiFrom}}</option>        
+            </select> 
+        </div>
+        <br>
+        <br>
+
+        <div class="w3-row" *ngIf="sGadiNudi">
+            <div class="w3-col m6 l4 w3-mobile" style='padding-right:5px'>
+                <div style="font-family: 'mTelFnt1'; font-size: 30px;">
+                    
+
+                    <table class="chess-board">
+                        <tbody>
+                            <tr *ngFor="let sRow of sGadiNudi.tD; index as i" >
+                                <td *ngFor="let sCell of sRow; index as j" [ngClass]=" sCell.t2 ? 'light' : 'dark'" (click)="teest12(i,j)">
+                                
+                                    <div ng-if="sCell.t4"  class="absoluteTop">
+                                        {{sCell.t4}}
+                                    </div>                        
+                                    <div id="{{'textBox_' + i +'_'+j}}" class="blueText">{{sCell.t3}}</div>                        
+                                </td>
+                            </tr>               
+                        </tbody>           
+                    </table>  
+                </div>      
+                    <br>
+                    <button (click)="checkAnswers()">జవాబులు సరి చూడు (Check Answers)</button>
+                    <button (click)="getClue()">చిన్న సహాయము (Give a Clue) </button>
+            </div>
+            <div class="w3-col m3 l4 w3-mobile" style='padding-left:5px'>
+                <div *ngIf="sGadiNudi.Addams.length > 0">
+                    <br>
+                    <div class="div-telugu30" style="background-color: lightblue">అడ్డము:     
+                    <div *ngFor="let addam of sGadiNudi.Addams">
+                        <div class="div-telugu20">{{addam}}</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col m3 l4 w3-mobile">
+                <div *ngIf="sGadiNudi.Niluvus.length > 0">
+                    <br>
+                    <div class="div-telugu30" style="background-color: lightpink">నిలువు:     
+                    <div *ngFor="let niluvu of sGadiNudi.Niluvus">
+                        <div class="div-telugu20">{{niluvu}}</div>
+                    </div>
+                    </div> 
+            </div>
+            </div>
+        </div>
+    
+
+        <br>
+        <table class="chess-board" *ngIf="sGadiNudi">
+            <tbody>
+                <tr *ngFor="let sRow of sGadiNudi.tD; index as i" >
+                    <td *ngFor="let sCell of sRow; index as j" [ngClass]=" sCell.t2 ? 'light' : 'dark'">
+                    
+                        <div ng-if="sCell.t4"  class="absoluteTop">
+                            {{sCell.t4}}
+                        </div>
+                        
+                        <div ng-if="sCell.t2" name="txtBox" class="w3-hide" >{{sCell.t2}}</div>
+                        
+                    </td>
+                </tr>               
+            </tbody>           
+        </table>
+
+        <br>
+
+
+        <input type="checkbox" id="showAns" (change)="showAnswers($event)">
+        <label for="showAns" class="div-telugu20"> సమాధానాలు చూపించుము.</label><br>
+
+    </ng-container >
+
+</div>

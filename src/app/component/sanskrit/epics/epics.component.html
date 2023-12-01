@@ -1,0 +1,50 @@
+
+<div class="w3-row">
+
+    <div class="w3-row">
+
+        <div class="w3-col col-md-4" >
+            <select class="form-select sabdams" style="font-size: 20px;" [(ngModel)]="selectedLesson" (change)="getAlesson()">
+              <option *ngFor="let filterVerb of lessonsList" [value]="filterVerb.val">{{filterVerb.des}}</option>
+            </select>
+        </div>
+
+        <Div class="w3-col col-md-4">
+            <h2 style="font-family:mHindiFnt3; text-align: center;">Epic Civilisation</h2>
+        </Div>
+
+        
+        <div class="w3-col col-md-4" >
+            <select class="form-select sabdams" style="font-size: 20px;" [(ngModel)]="gameSeleted" (change)="getAlesson()">
+              <option *ngFor="let qOption of qOptions" [value]="qOption.val">{{qOption.des}}</option>
+            </select>
+        </div>
+
+    </div>
+    
+    
+
+    
+
+    <button type="button" class="btn btn-outline-primary me" (click)="createAQuestion()">Try another question</button>
+
+
+    <div class="welcome-message radio-group">
+
+        <h2>{{epicQuesion}}</h2>
+
+        <div style="margin: 20px;" *ngFor="let wrongAnswer of fiveAnswers">
+            <input class="form-check-input" type="radio" name="options" [value]="wrongAnswer" [(ngModel)]="selectedOption">
+            <label  style="margin-left: 10px; margin-top: 5px" class="form-check-label" for="boy">{{ wrongAnswer }}</label>   
+        </div>
+        <button type="button" class="btn btn-outline-primary me" (click)="onSelectionChange()">Test Answer</button>
+
+        <h3 *ngIf="bWrongAnswer" style="color: red;">{{AnswerComment}}</h3>
+        <h3 *ngIf="!bWrongAnswer" style="color: green;">{{AnswerComment}}</h3>
+
+        <h3>Score = {{nScoreCount}} / {{nQuestionsCount}}</h3>
+
+    </div>
+
+
+</div>

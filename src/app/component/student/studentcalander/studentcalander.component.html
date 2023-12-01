@@ -19,23 +19,95 @@
 <div class="w3-col" *ngIf="usersClassData.length > 0">
     <div class="card card-body">
         
-      <h2>Class Calendar</h2>
 
-      <table class="table table-hover" *ngIf="selectedClassSchedules.length > 0" >
+
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="selectedFilterOption" (change)="onFilterSelectionChange()">
+          <option *ngFor="let filterOpt of filterOptions" [value]="filterOpt">{{filterOpt}}</option>
+        </select>
+      </div>
+
+      <table class="table table-hover" *ngIf="selectedClassSchedulesToTable.length > 0 && selectedFilterOption != 'Select a Class Session'" >
         <thead>
           <tr>
             <th>Sl. No.</th>
             <th>Date</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
   
-          <tr *ngFor="let selectedClassSchedule of selectedClassSchedules; let i = index" (click)="selectedDate = selectedClassSchedule.scheduledate" [class.table-primary]="selectedClassSchedule.classid === selectedDate">
-            <td>{{i+1}}</td>
-            <td>{{ formatDateInternational(selectedClassSchedule.scheduledate) }}</td>              
-          </tr>
+          <tr *ngFor="let selectedClassSchedule of selectedClassSchedulesToTable; let i = index" (click)="OnSelectSchedule(selectedClassSchedule.schedule)" [class.table-primary]="selectedClassSchedule.schedule.scheduledate === selectedDate">
+            <td>{{selectedClassSchedule.SlNo}}</td>
+            <td>{{ formatDateInternational(selectedClassSchedule.schedule.scheduledate) }}</td>              
+            <td *ngIf="selectedClassSchedule.SlNo==previousClassNumber+1">Previous Class</td>
+            <td *ngIf="selectedClassSchedule.SlNo==nextClassNumber+1">Next Class</td>
+            <td *ngIf="selectedClassSchedule.SlNo!=nextClassNumber+1 && selectedClassSchedule.SlNo!=previousClassNumber+1"></td>
+        </tr>
         </tbody>
       </table>
+
+      <div *ngIf="selectedSchedule">
+
+        <h2>Class Calendar</h2>
+
+        <h2 >Session on Date : {{formatDateInternational(selectedSchedule.scheduledate)}}</h2>
+
+        <div *ngIf="bShowSelectedSchedules">
+
+        
+
+          <h3 style="background-color: lightgreen;" *ngIf="selectedScheduleForStudent.present == 'Present'">You are present for this class</h3>
+          <h3 style="background-color: yellow;" *ngIf="selectedScheduleForStudent.present == 'Authorised Absent'">You are absent for this class</h3>
+          <h3 style="background-color: lightcoral;" *ngIf="selectedScheduleForStudent.present == 'Unauthorised Absent'">You are absent (unauthorised) for this class</h3>
+          <h3 style="background-color: lightcoral;" *ngIf="selectedScheduleForStudent.present == 'Not marked'">Attendance not yet marked</h3>
+
+          <div *ngIf="selectedScheduleForStudent.present !== 'Authorised Absent' && selectedScheduleForStudent.present !== 'Unauthorised Absent'" class="input-group mb-3" style="margin-top: 20px;">
+              <input  type="checkbox" id="enrolled" [(ngModel)]="bShowAbsents" >
+            <label for="enrolled" style="padding-left: 5px; "> If can't attend class, please click here and mention to teacher</label>   
+          </div>
+          <div *ngIf="bShowAbsents || selectedScheduleForStudent.present == 'Authorised Absent' || selectedScheduleForStudent.present == 'Unauthorised Absent'">
+              <div class="mb-3" >
+                  <label for="classwork" >Reason for absent</label>
+                  <input type="text" class="form-control" name="absentreason" [(ngModel)]="selectedScheduleForStudent.reasonAbsent">
+              </div>
+          </div>  
+
+
+          <div class="mb-3">
+              <label for="classwork" >Class Work:</label>
+              <textarea class="form-control" readonly="true" style="background-color: lightgray;"  data-gramm="false" name="classwork" [(ngModel)]="selectedSchedule.classwork" rows="4"></textarea>                       
+          </div>
+
+          <div class="input-group mb-3" style="margin-top: 20px;">
+              <input  type="checkbox" id="enrolled" [(ngModel)]="selectedScheduleForStudent.classworkunderstand" >
+            <label for="enrolled" style="padding-left: 5px; "> I have understand the Class Work</label>   
+          </div>
+
+          <div class="mb-3">
+              <label for="classwork" >Students notes: (indicate what you learnt? Or if any doubts)</label>
+              <textarea class="form-control" data-gramm="false" name="classwork" [(ngModel)]="selectedScheduleForStudent.studentcomment" rows="4"></textarea>                       
+          </div>
+
+          <div class="mb-3">
+              <label for="homework" >Home Work:</label>
+              <textarea class="form-control" style="background-color: lightgray;" readonly="true" data-gramm="false" name="homework" [(ngModel)]="selectedSchedule.homework" rows="4"></textarea>                       
+          </div>        
+
+          <div class="input-group mb-3" style="margin-top: 20px;">
+              <input  type="checkbox" id="enrolled" [(ngModel)]="selectedScheduleForStudent.homeworksubmitted" >
+            <label for="enrolled" style="padding-left: 5px; "> I have completed and submitted my homework</label>   
+          </div>
+
+          <div class="mb-3">
+              <label for="classwork" >Teacher's feedback</label>
+              <textarea class="form-control" readonly="true" style="background-color: lightgray;"  data-gramm="false" name="classwork" [(ngModel)]="selectedScheduleForStudent.teachercomment" rows="4"></textarea>                       
+          </div>
+
+          <button type="button" class="btn btn-outline-primary me-1" (click)="updateData()">Save</button>
+          <button type="button" class="btn btn-outline-danger me-5" (click)="cancelData()">Cancel</button>
+        </div>
+      </div>
 
     </div>
 </div>

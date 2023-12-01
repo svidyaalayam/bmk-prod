@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Classschedule  } from '../model/classschedule';
+import { Classschedulestudent } from '../model/classschedulestudent'
 import { FirebaseApp } from '@angular/fire/app';
 import { Observable, map } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -28,4 +29,39 @@ export class ClassschedulesService {
   getAllSchedulesForClass(classID:string): Observable<Classschedule[]> {    
     return this.firestore.collection<any>('schedules', ref => ref.where('classid', '==', classID)).valueChanges();
   }
+
+ 
+  // Read
+  getAllSchedulesStudentsForClass(scheduleID:string): Observable<Classschedulestudent[]> {    
+    return this.firestore.collection<any>('schedulestudents', ref => ref.where('classScheduleid', '==', scheduleID)).valueChanges();
+  }
+
+      // Get or Create and Get
+      async getClassScheduleStudent(scheduleId: string, studentId: string ): Promise<any> {
+        const docRef = doc(getFirestore(this.fbap), "schedulestudents", scheduleId+studentId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          return docSnap.data();
+        }
+
+        const data: Classschedulestudent = {
+          classScheduleid : scheduleId,
+          studentid : studentId,
+          present : 'Not marked',
+          reasonAbsent : '',
+          classworkunderstand : false,
+          homeworksubmitted : false,
+          studentcomment : '',
+          teachercomment : ''
+        }
+      
+        return await setDoc(doc(getFirestore(this.fbap), 'schedulestudents', scheduleId+studentId), data);
+     
+      }
+
+        // Create enrollment
+  async updateClassScheduleStudent(data: Classschedulestudent): Promise<any> {
+      return await setDoc(doc(getFirestore(this.fbap), 'schedulestudents', data.classScheduleid+data.studentid), data);
+  }
+  
 }

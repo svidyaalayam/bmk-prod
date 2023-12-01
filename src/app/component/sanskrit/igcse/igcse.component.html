@@ -1,0 +1,28 @@
+<div *ngIf="nShowTheTab==0">
+    <h1 style="text-align: center;">IGCSE® Sanskrit</h1>
+    <h2 style="text-align: center;">International General Certificate of Secondary Education</h2>
+    
+    <h2>KEY INFORMATION -- Examination Dates</h2>
+
+    <h3>The IGCSE® examination takes place each year in May/June. Dates for 2024 (confirmed):</h3>
+    <h3 >Paper 1 (1.5 hrs) - Tuesday 30th April 2024, 1.30pm</h3>
+    <h3>Paper 2 (1.5 hrs) - Thursday 2nd May 2024, 1.30pm</h3>
+
+    <p>Private candidates are advised to register with their chosen exam centre well in advance of the deadline (end of January for 2024). School students should refer to their school's examination officer for details.</p>
+
+
+</div>
+
+<app-sentences *ngIf="nShowTheTab==1"></app-sentences>
+<app-epics *ngIf="nShowTheTab==2"></app-epics>
+
+<div class="container">
+    <div class="inline-buttons">
+
+      <button *ngIf="nShowTheTab!=0" type="button" class="primary-button" (click)="nShowTheTab = 0">Home Page</button>
+      <button *ngIf="nShowTheTab!=1" type="button" class="primary-button" (click)="nShowTheTab = 1">Books & Resources</button>
+      <button *ngIf="nShowTheTab!=2" type="button" class="primary-button" (click)="nShowTheTab = 2">Quiz-Epic Civilisation</button>
+      
+
+    </div>
+</div>

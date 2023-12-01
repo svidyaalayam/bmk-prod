@@ -21,8 +21,7 @@ export class AuthService {
     public router: Router,
     private sd : StudentsDataService
 
-  ) {  
-    this.getCurrentUser(); }
+  ) {   }
 
     ngOnInit(): void{
       this.getCurrentUser();
@@ -80,6 +79,12 @@ export class AuthService {
     register(email : string, password : string, registeringAs : number,
       sName : string, sSurname : string, sParentsname : string, 
       sGender : string, sDob : string, sContactnumber : string, nClasssEnrolled : number[]) {
+
+      if(!this.sd.getFireStoreAvailability) {
+        console.log('Data cant be added to database please try again');
+      }
+
+
       return this.fireauth.createUserWithEmailAndPassword(email, password).then( res => { 
         this.currentUser =res.user;
         const emailSent = this.sendEmailForVarification(res.user);
@@ -121,7 +126,7 @@ export class AuthService {
                 
               });
               
-              console.log('Data added to database successfully!');
+            //  console.log('Data added to database successfully!');
             })                   
 
 
@@ -198,15 +203,17 @@ export class AuthService {
     }
 
     userLogged(): boolean {
+      this.getCurrentUser();
       return this.currentUser !== null;      
     }
 
     userNotLogged(): boolean {
-      console.log(this.currentUser === null);
-      return this.currentUser !== null;      
+      this.getCurrentUser();
+      return this.currentUser === null;      
     }
 
     getUserType(): number {
+      this.getCurrentUser();
       return this.currentUserData?.usertype;
     }
 
@@ -217,13 +224,5 @@ export class AuthService {
     getUserAccountSuspended(): boolean {
       return this.currentUserData?.accountsuspended;
     }
-
-
-
-      
-
-
-
-
 
 }

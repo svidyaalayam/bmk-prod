@@ -37,6 +37,22 @@ export class StudentsDataService {
     });
   }  
 
+  getFireStoreAvailability(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.firestore.collection('users').get().subscribe(
+        (snapshot) => {
+          resolve(!snapshot.empty);
+        },
+        (error) => {
+          console.error('Firestore is not available:', error.message);
+          resolve(false);
+        }
+      );
+
+    })
+  }
+
+
     // Create
     async create(data: any): Promise<any> {
       return await setDoc(doc(getFirestore(this.fbap), 'users', data.loginid), data);
@@ -100,7 +116,6 @@ export class StudentsDataService {
       const usersRef = collection(getFirestore(this.fbap), 'users');
       const q = query(usersRef, where("usertype", "==", userType));
       const querySnapshot = await getDocs(q);
-      console.log(querySnapshot);
 
       const users: any[] = [];
 
@@ -175,7 +190,7 @@ export class StudentsDataService {
     }  
     // Read
     getAllEnrollmentsForUser(UserID:string): Observable<Enrollment[]> {
-      console.log(UserID) ;       
+     
       return this.firestore.collection<any>('enrollment', ref => ref.where('sudentid', '==', UserID)).valueChanges();
     }
     // remove
