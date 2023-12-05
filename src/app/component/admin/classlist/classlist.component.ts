@@ -256,7 +256,10 @@ export class ClasslistComponent {
         enddate : ''
       }
       this.sd.createClassUsers(newClassUser, false).then(() => {
-        this.getStudents();
+        this.sd.updateUserwithClasses(this.selectedStudentID).then(()=>
+        {
+          this.getStudents();
+        });
        }) 
     }
   }
@@ -267,8 +270,13 @@ export class ClasslistComponent {
       this.classStudents.forEach(classStudent => {
         if(classStudent.student.loginid == this.selectedStudentID){
           this.sd.removeClassUsers(classStudent.docID, false).then(() => {
-            this.getStudents();
-            this.showRemoveStudentButton = false;
+            this.sd.updateUserwithClasses(this.selectedStudentID).then(()=>
+            {
+              this.getStudents();
+              this.showRemoveStudentButton = false;
+            });
+            
+            
           });
         }
       })

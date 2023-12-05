@@ -1,0 +1,23 @@
+<div class="w3-row div-telugu20">
+
+    <div class="w3-col m4 l4 w3-mobile" style="padding: 10px;">
+
+        <select class="form-select sabdams" [(ngModel)]="selectedLesson" (change)="getAlesson()">
+            <option *ngFor="let filterVerb of lessonsList" [value]="filterVerb.val">{{filterVerb.des}}</option>
+          </select>
+
+        <div class="w3-light-grey" >
+            <button *ngFor="let wsObjs of booklinks; index as i" class="w3-button w3-mobile" (click)="incrementCounter(i)"><div id="{{ 'wsObjs' + i }}">{{i+1}}) {{wsObjs.titleName}}</div></button>
+        </div> 
+    
+    </div>
+
+
+    <div class="w3-col m8 l8 w3-mobile" style="padding: 10px;">
+
+        <h2 style="text-align: center;">{{booklinks[currentCount].titleName}}</h2>
+        <iframe [src]="booklinks[currentCount].pdfLink" width="640" height="960" allow="autoplay"></iframe>        
+    
+    </div>
+
+</div>

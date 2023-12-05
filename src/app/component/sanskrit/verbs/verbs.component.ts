@@ -62,6 +62,10 @@ export class VerbsComponent implements OnInit {
   getVerbMeaning(): string{
     return this.sanVerbs.getMeaningForVerb(this.selectedVerb);
   }
+
+  getMeaningForVerb(verb: string): string{
+    return this.sanVerbs.getMeaningForVerb(verb);
+  }
   
 
   getAverb(){

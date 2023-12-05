@@ -5,7 +5,7 @@
 
         <div class="w3-col col-md-4" >
             <select class="form-select sabdams" style="font-size: 20px;" [(ngModel)]="selectedVerb" (change)="getAverb()">
-              <option *ngFor="let filterVerb of verbsList" [value]="filterVerb">{{filterVerb}} ({{getVerbMeaning()}})</option>
+              <option *ngFor="let filterVerb of verbsList" [value]="filterVerb">{{filterVerb}} ({{getMeaningForVerb(filterVerb)}})</option>
             </select>
         </div>
 

@@ -10,6 +10,10 @@ import { Router } from '@angular/router';
 
 //<app-dashboard *ngIf="nShowTheTab==0"></app-dashboard>
 
+//      <app-actions *ngIf="nShowTheTab==34"></app-actions>
+//<button type="button" class="primary-button" *ngIf="bValidAdmin" (click)="nShowTheTab = 34">Admin Actions</button>
+
+
 @Component({
   selector: 'app-student-data',
   templateUrl: './student-data.component.html',
@@ -86,7 +90,8 @@ export class StudentDataComponent {
 
     getOrUpdateUserDetals(){
       this.fa.authState.subscribe(user => {
-        const myEmail : any = user?.email;
+        let myEmail : any = user?.email;
+        myEmail = ""+user?.email;
         this.loggeduser = user;
         this.sd.GetStudent(myEmail).then((student: Userdata) => {
           this.bmkuser = student;
@@ -137,8 +142,6 @@ export class StudentDataComponent {
             this.bValidAdmin = false;
           }
           if(student.usertype == 0){
-            if(student.teachername == 'New Registration, not in any class' || student.teachername == 'Select a class')
-            this.welcomeData.sMessages.push({warn: true, msg: "Select name of your class teacher, so that admin can assign you to class quickly."});
             
             if(student.photourl == '')
             this.welcomeData.sMessages.push({warn: false, msg: 'Please update all Your Personal Details and also please add a profile image.'});

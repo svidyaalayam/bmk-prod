@@ -39,7 +39,8 @@ export class AppComponent {
       if(this.isLoggedIn$){
         if(''+user?.email !== 'null')
         {
-          this.sd.GetStudent(''+user?.email).then((student: Userdata) => {
+          let myEmail = ""+user?.email;
+          this.sd.GetStudent(myEmail).then((student: Userdata) => {
             if(student.name !== ''){
               this.sLoggedUser = "Hi " + student.name;
             }

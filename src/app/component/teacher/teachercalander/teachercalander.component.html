@@ -79,6 +79,10 @@
           <div *ngIf="attendanceCreated">
             <h3>Attendance : {{getAtendance()}}</h3>
 
+            <button *ngIf="selectedClassStudentsData.length>0" type="button" class="btn btn-outline-primary me-1" (click)="markAllPresent()">Mark All Present & Edit</button>
+            <button *ngIf="selectedClassStudentsData.length>0" type="button" class="btn btn-outline-primary me-1" (click)="markAllNotMarked()">Change All Not Marked</button>
+            
+
             <div *ngFor="let selectedClassStudentData of selectedClassStudentsData">
 
               <div class="input-group mb-3" style="margin-top: 20px;">

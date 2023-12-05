@@ -63,5 +63,11 @@ export class ClassschedulesService {
   async updateClassScheduleStudent(data: Classschedulestudent): Promise<any> {
       return await setDoc(doc(getFirestore(this.fbap), 'schedulestudents', data.classScheduleid+data.studentid), data);
   }
+
+
+  getAllSchedulesOnDate(classID:string): Observable<Classschedule[]> {    
+    return this.firestore.collection<any>('schedules', ref => ref.where('classid', '==', classID)).valueChanges();
+  }
+
   
 }

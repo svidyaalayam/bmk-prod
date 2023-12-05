@@ -15,7 +15,7 @@
 
     <button type="button" class="primary-button" *ngIf="bValidAdmin" (click)="nShowTheTab = 32">Users Management</button>
     <button type="button" class="primary-button" *ngIf="bValidAdmin" (click)="nShowTheTab = 33">Classes Management</button>
-
+    
 
   </div>
 
@@ -36,6 +36,7 @@
       <app-classlist *ngIf="nShowTheTab==33"></app-classlist>
 
 
+
       
           
     </div>  
@@ -46,6 +47,9 @@
 <div *ngIf="nShowTheTab>0">
   <button type="button" class="primary-button"  (click)="nShowTheTab = 0">Back to Home Page</button>
 </div>
+
+
+<app-dashboard *ngIf="nShowTheTab==0 && (bValidAdmin || bValidTeacher)"></app-dashboard>
 
 
 

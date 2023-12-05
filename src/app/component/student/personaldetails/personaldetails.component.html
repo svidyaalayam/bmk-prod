@@ -76,13 +76,7 @@
           <img src={{bmkuser.photourl}} alt="Profile picture" style="width:100px">
         </div>
 
-        <div class="mb-3">
-            <label for="teachername">If you are an existing student please provide your class name so it will help our admin team:</label>
-            <select class="form-select" [(ngModel)]="selectedId" name="teachername" (change)="onTeacherDataSelected()">
-              <option *ngFor="let bmkClass of bmkClasses; let i = index" [value]="i">{{bmkClass.name}}</option>
-            </select>
-          </div>
-  
+
   
         <button type="submit" class="btn btn-outline-primary me-1">Submit</button>
         <button type="button" class="btn btn-outline-danger" (click)="cancelForm()">Cancel</button>

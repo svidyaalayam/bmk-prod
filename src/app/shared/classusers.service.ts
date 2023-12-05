@@ -27,6 +27,22 @@ export class ClassusersService {
         return this.firestore.collection<Userdata>('classusers', ref => ref.where('classid', '==', ClassID)).valueChanges();
       }
 
+      // Read not fully completed.
+/*      getCountUsersForClass(ClassID:string): Observable<any[]> {
+
+        const userDataCollection = this.firestore.collection<Userdata>('UserData', ref => ref.where('yourField', '==', 'yourValue'));
+
+        userDataCollection.get()
+        .subscribe(snapshot => {
+          // Get the count of documents
+          const count = snapshot.size;
+          console.log(`Number of documents with the condition: ${count}`);
+        }, error => {
+          console.error('Error getting documents:', error);
+        });
+
+      }
+*/
 
   // Create
   async createClassUsers(data: any): Promise<any> {

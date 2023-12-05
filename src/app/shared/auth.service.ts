@@ -38,7 +38,8 @@ export class AuthService {
       if(user !== null){
         if(''+user?.email !== 'null')
         {
-          this.sd.GetStudent(''+user?.email).then((student: Userdata) => {
+          let myEmail = ""+user?.email;
+          this.sd.GetStudent(myEmail).then((student: Userdata) => {
             this.currentUserData = student;
           });
         }        

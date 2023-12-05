@@ -73,41 +73,41 @@ export class StudentsDataService {
     // Read
     getAllUsers(): Observable<any[]> {
         return this.firestore.collection<Userdata>('users').valueChanges().pipe(
-          map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, gender: student.gender })))
+          map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, teachername: student.teachername })))
         );
     }
 
     // Read
     getAllAcceptedActiveUsersOfType(filterValue:number): Observable<any[]> {
       return this.firestore.collection<Userdata>('users', ref => ref.where('usertype', '==', filterValue).where('accepted', '==', true).where('accountsuspended', '==', false)).valueChanges().pipe(
-        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, gender: student.gender })))
+        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, teachername: student.teachername })))
       );
     }
 
     // Read
     getAllUsersOfType(filterValue:number): Observable<any[]> {
       return this.firestore.collection<Userdata>('users', ref => ref.where('usertype', '==', filterValue)).valueChanges().pipe(
-        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, gender: student.gender })))
+        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, teachername: student.teachername })))
       );
     }
 
     getAllUsersOfFilter(filterType:string, filterValue:string): Observable<any[]> {
       return this.firestore.collection<Userdata>('users', ref => ref.where(filterType, '==', filterValue)).valueChanges().pipe(
-        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, gender: student.gender })))
+        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, teachername: student.teachername })))
       );
     }
 
     // Read
     getAllNewRegs(): Observable<any[]> {
       return this.firestore.collection<Userdata>('users', ref => ref.where('accepted', '==', false)).valueChanges().pipe(
-        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, gender: student.gender })))
+        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, teachername: student.teachername })))
       );
     }
 
     // Read
     getAllSuspended(): Observable<any[]> {
       return this.firestore.collection<Userdata>('users', ref => ref.where('accountsuspended', '==', true)).valueChanges().pipe(
-        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, gender: student.gender })))
+        map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, teachername: student.teachername })))
       );
     }
 
@@ -124,14 +124,24 @@ export class StudentsDataService {
           loginid: student.data()['loginid'], 
           name: student.data()['name'], 
           surname: student.data()['surname'], 
-          gender: student.data()['gender']
+          teachername: student.data()['teachername']
         }
         users.push(user);
       });
       return users;
     }
         
+    // Read
+    getAllStudentsInClass(): Observable<any[]> {
+      return this.firestore.collection<Userdata>('users', ref => ref.where('teachername', '!=', '')).valueChanges();
+    }
 
+        // Read
+        getAllStudentsNotInAnyClass(): Observable<any[]> {
+          return this.firestore.collection<Userdata>('users', ref => ref.where('teachername', '==', '').where('usertype', '==', 0)).valueChanges().pipe(
+            map(users => users.map(student => ({loginid: student.loginid, name: student.name, surname: student.surname, teachername: student.teachername })))
+          );
+        }
 
   
     // Read
@@ -149,11 +159,7 @@ export class StudentsDataService {
       return this.firestore.collection('users').doc(id).delete();
     }
 
-    // Read
-    getStudentWithLoginId(loginName: string): Observable<any> {
-      return this.firestore.collection('users', ref => ref.where('loginid', '==', loginName).limit(1))
-      .valueChanges() ;
-    }
+
 
     updateStudentWithLoginId(loginName: string, data: any): Observable<any> {
       return this.firestore.collection('users', ref => ref.where('loginid', '==', loginName).limit(1))
@@ -199,6 +205,37 @@ export class StudentsDataService {
         this.firestore.collection('enrollment').doc(docRef).delete();
       }
     } 
+
+    async updateUserwithClasses(UserID:string):Promise<any> {
+ 
+      this.GetStudent(UserID).then((bmkU) => {
+
+        this.getAllClassesForUser(""+bmkU.loginid).subscribe(bmkClass=> {
+          {
+            let sClassText: string = '';
+            if (bmkClass.length>0){
+              bmkClass.forEach(bmlClas => {
+                this.GetClassWithID(bmlClas.classid).then(res => {      
+                  sClassText = (sClassText=='') ? res.name : sClassText + '; ' + res.name
+                  bmkU.teachername = sClassText;
+                  this.create(bmkU).then(() => {
+                    console.log(bmkU.name + " updated with classes.")
+                  })
+                }) 
+              })
+            }
+            else{
+              bmkU.teachername = "";
+              this.create(bmkU).then(() => {
+                console.log(bmkU.name + " updated with no classes.")
+              })
+            }       
+          }
+        });
+
+      })     
+
+    }
 
 
 

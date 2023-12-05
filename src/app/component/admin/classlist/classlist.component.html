@@ -61,6 +61,7 @@
             <tr>
               <th>Student Name</th>
               <th>Email</th>
+              <th>AttendingClasses</th>
               <th>Photo</th>
             </tr>
           </thead>
@@ -68,6 +69,7 @@
             <tr *ngFor="let classStudent of classStudents" (click)="selectedStudentID = classStudent.student.loginid; showRemoveStudentButton=false" [class.table-primary]="classStudent.student.loginid === selectedStudentID">
               <td>{{ classStudent.student.name }} {{ classStudent.student.surname }}</td>
               <td>{{ classStudent.student.loginid }}</td>
+              <td>{{ classStudent.student.teachername }}</td>
               <td><img src={{classStudent.student.photourl}} alt="Profile picture" style="width:100px"></td>
             </tr>
           </tbody>

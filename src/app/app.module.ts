@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule} from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -62,6 +63,10 @@ import { NounsComponent } from './component/sanskrit/nouns/nouns.component';
 import { SentencesComponent } from './component/sanskrit/sentences/sentences.component';
 import { IgcseComponent } from './component/sanskrit/igcse/igcse.component';
 import { EpicsComponent } from './component/sanskrit/epics/epics.component';
+import { ScrollHeaderComponent } from './component/others/scroll-header/scroll-header.component';
+import { ActionsComponent } from './component/admin/actions/actions.component';
+import { RamayanamComponent } from './component/others/ramayanam/ramayanam.component';
+import { AttendanceComponent } from './component/admin/attendance/attendance.component';
 
 @NgModule({
   declarations: [
@@ -113,9 +118,13 @@ import { EpicsComponent } from './component/sanskrit/epics/epics.component';
     SentencesComponent,
     IgcseComponent,
     EpicsComponent,
+    ScrollHeaderComponent,
+    ActionsComponent,
+    RamayanamComponent,
+    AttendanceComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, HttpClientModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseProductionebApp)),
     provideAuth(() => getAuth()),
@@ -123,7 +132,7 @@ import { EpicsComponent } from './component/sanskrit/epics/epics.component';
     FormsModule, BrowserAnimationsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebaseProductionebApp }],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebaseProductionebApp}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

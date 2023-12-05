@@ -112,6 +112,15 @@ export class CheckusersComponent {
         this.showTable = true;
         break;
 
+      case 'All not in any class':
+        this.sd.getAllStudentsNotInAnyClass().subscribe(users => {this.users = users; this.filteredusers = users});        
+        this.showTable = true;
+        break;
+
+
+
+        
+
       case 'Search by class':
           
             
@@ -213,7 +222,7 @@ export class CheckusersComponent {
       return item.loginid.toLowerCase().includes(this.filterTextLogin.toLowerCase())
       && item.name.toLowerCase().includes(this.filterTextName.toLowerCase())
       && item.surname.toLowerCase().includes(this.filterTextSurname.toLowerCase())
-      && item.gender.toLowerCase().includes(this.filterTextGender.toLowerCase());       
+      && item.teachername.toLowerCase().includes(this.filterTextGender.toLowerCase());       
     });
   }
 

@@ -180,6 +180,19 @@ export class TeachercalanderComponent {
     return this.commFuncs.formatDateInternational(inDate);
   }
 
+  markAllPresent(): void {
+    this.selectedClassStudentsData.forEach(studentschedule => {
+      studentschedule.schedule.present='Present';
+      this.csched.updateClassScheduleStudent(studentschedule.schedule);
+    })
+  }
+  markAllNotMarked(): void {
+    this.selectedClassStudentsData.forEach(studentschedule => {
+      studentschedule.schedule.present='Not marked';
+      this.csched.updateClassScheduleStudent(studentschedule.schedule);
+    })
+  }
+
   takeAttendance(): void {
     this.selectedClassStudentsData.forEach(studentschedule => {
       this.csched.getClassScheduleStudent(this.selectedSchedule.dataId, studentschedule.student.loginid).then((scheduleStudent) => {

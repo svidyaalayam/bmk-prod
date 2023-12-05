@@ -60,9 +60,9 @@ export class LoginComponent {
       this.sAuthResponse = response.msg;
       if(response.error === 'verify') this.bShowActivateButton = true;
       this.loggedUser = response.user; 
-      this.sd.getItems().subscribe(data => {
-      
-    });
+    //  this.sd.getItems().subscribe(data => {
+    //  
+    //});
     });       
   }
 

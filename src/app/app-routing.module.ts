@@ -26,6 +26,7 @@ import { NounsComponent } from './component/sanskrit/nouns/nouns.component';
 import { VerbsComponent } from './component/sanskrit/verbs/verbs.component';
 import { SentencesComponent } from './component/sanskrit/sentences/sentences.component';
 import { IgcseComponent } from './component/sanskrit/igcse/igcse.component';
+import {RamayanamComponent} from './component/others/ramayanam/ramayanam.component';
 
 
 
@@ -63,6 +64,7 @@ const routes: Routes = [
   {path: 'sverbs', component: VerbsComponent},
   {path: 'ssentences', component: SentencesComponent},
   {path: 'igcse', component: IgcseComponent},
+  {path: 'stories', component: RamayanamComponent},
 
   {path: 'login', component : LoginComponent}, 
   {path: 'logout', component : LogoutComponent, canActivate: [authGuard]},

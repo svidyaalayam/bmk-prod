@@ -1,0 +1,30 @@
+/* header.component.css */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  .scrolling-text-container {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .scrolling-text {
+    display: inline-block;
+    padding-right: 35%; /* create space for the animation to move */
+    animation: scrollText 60s linear infinite; /* adjust the animation duration as needed */
+  }
+  
+  @keyframes scrollText {
+    0% {
+      transform: translateX(50%); /* move text to the right */
+    }
+  
+    100% {
+      transform: translateX(-100%); /* move text to the left */
+    }
+  }

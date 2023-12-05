@@ -29,42 +29,33 @@ export class DashboardComponent {
 
   getAllBirthDayUsers():void{
 
-    const today = new Date();
+    const today = new Date(); // new Date("2024-01-06");
     const currentWeekStart = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (today.getDay()>0 ? today.getDay() : 7));
     const currentWeekEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (13 - today.getDay()));
     const bSameYear = (currentWeekStart.getFullYear() == currentWeekEnd.getFullYear());
-    this.sd.getItems().subscribe(bmkUs => {
+    this.sd.getAllStudentsInClass().subscribe(bmkUs => {
       let bDayUsers : any [] = [];
       bmkUs.forEach(bmkU => {
         const bmkDate = new Date(bmkU.dob)
         const bmkBirthDat = new Date(today.getFullYear(), bmkDate.getMonth(), bmkDate.getDate());
         if(bmkBirthDat >= currentWeekStart && bmkBirthDat <= currentWeekEnd){
-          this.sd.getAllClassesForUser(bmkU.loginid).subscribe(bmkClass=> {
-            {
-              let bdata = {
-                'name':bmkU.name +' '+ bmkU.surname,
-                'class':'',
-                'dob': this.commFuncs.formatDateWithoutYear(bmkBirthDat.toDateString()),
-                'photourl': bmkU.photourl
-              }
-              let sClassText: string = '';
-              bmkClass.forEach(bmlClas => {
-                this.sd.GetClassWithID(bmlClas.classid).then(res => {
-                  console.log(res.name);
-                  sClassText = (sClassText=='') ? res.name : sClassText + '; ' + res.name
-                  bdata.class = sClassText;
-                })  
-                
-                bDayUsers.push(bdata);
-                
-              })
- 
-            }
-          });           
+          let bdata = {
+            'name':bmkU.name +' '+ bmkU.surname,
+            'class':bmkU.teachername,
+            'dob': this.commFuncs.formatDateWithoutYear(bmkBirthDat.toDateString()),
+            'photourl': bmkU.photourl
+          }
+          bDayUsers.push(bdata);  
+       /*   let bdata = {
+            'name':bmkU.name +' '+ bmkU.surname,
+            'class':'',
+            'dob': this.commFuncs.formatDateWithoutYear(bmkBirthDat.toDateString()),
+            'photourl': bmkU.photourl
+          } 
+          bDayUsers.push(bdata);  */     
           
         } 
       })
-
 
       this.bDays = bDayUsers;
     
