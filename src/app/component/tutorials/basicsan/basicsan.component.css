@@ -1,0 +1,93 @@
+@font-face {
+    font-family: NotoSansTelugu;
+    src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/otf/NotoSansTelugu/NotoSansTelugu-Regular.otf');
+    unicode-range: U+0951-0952, U+0964-0965, U+0C00-0C7F, U+1CDA, U+200C-200D, U+25CC;
+  }
+
+  @font-face {
+    font-family: 'Siddhanta';
+  src: url('https://cdn.jsdelivr.net/gh/googlei18n/noto-fonts/unhinted/otf/NotoSansTelugu/NotoSansTelugu-Regular.otf');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+  }
+
+  @font-face {
+  font-family: 'Siddhanta12';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/notosans/v12/o-0IIpQlx3QUlC5A4PNr5DRAW_0.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+
+  @font-face {
+    font-family: TeluguHandWrite;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/akayatelivigala/v9/lJwc-oo_iG9wXqU3rCTD395tp0uiTcnXsbH0.woff2) format('woff2');
+    unicode-range: U+0951-0952, U+0964-0965, U+0C00-0C7F, U+1CDA, U+200C-200D, U+25CC;
+  }
+
+  @font-face {
+    font-family: TeluguNTR;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ntr/v10/RLpzK5Xy0ZjSA2Jt1TA.woff2) format('woff2');
+    unicode-range: U+0951-0952, U+0964-0965, U+0C00-0C7F, U+1CDA, U+200C-200D, U+25CC;
+  }
+
+  @font-face {
+    font-family: TeluguTenaliRama;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/tenaliramakrishna/v7/raxgHj6Yt9gAN3LLKs0BZVMo8jmwn1-MM5_rYFE.woff2) format('woff2');
+    unicode-range: U+0951-0952, U+0964-0965, U+0C00-0C7F, U+1CDA, U+200C-200D, U+25CC;
+  }
+
+  body {
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+	font-family: Arial, sans-serif;
+	display: flex;
+            align-items: center;
+            justify-content: center;
+}
+
+.a4-sheet {
+	width: 210mm;
+
+	margin: 20mm;
+	padding: 10mm;
+	background-color: #ffffff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.a4-sheet img {
+	max-width: 100%; /* Ensure the image doesn't exceed the sheet width */
+	height: auto;
+	margin-bottom: 5px; /* Add some space below the image */
+}
+
+.element-container {
+	display: flex;
+	justify-content: space-around; /* Adjust as needed */
+	margin-top: 20px; /* Add some space between the sheet and elements */
+}
+
+.element {
+	/*width: 200px;  Adjust the width as needed */	
+	text-align: center;
+	margin: 10px; /* Adjust the margin as needed */
+}
+
+.wavy-line {
+  width: 100%;
+  height: 20px; /* Adjust the height as needed */
+  background-color: #f0f0f0; /* Set the background color of the line */
+  position: relative;
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+

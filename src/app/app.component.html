@@ -63,6 +63,15 @@
     </div>
 
     <div class="w3-dropdown-hover  w3-hide-small">
+      <!--<button class="w3-button" *ngIf="isLoggedIn$ | async">Lessons</button>-->
+      <button class="w3-button">Tutorials</button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a routerLink="basicsan" class="w3-bar-item w3-button">Sanskrit</a>
+        <a routerLink="basictel" class="w3-bar-item w3-button">Telugu</a> 
+      </div>
+    </div>
+
+    <div class="w3-dropdown-hover  w3-hide-small">
       <!--<button class="w3-button" *ngIf="isLoggedIn$ | async">Resources</button>-->
       <button class="w3-button" >Resources</button>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -124,6 +133,14 @@
         <a routerLink="sverbs" class="w3-bar-item w3-button">Verbs</a> 
         <a routerLink="igcse" class="w3-bar-item w3-button">IGCSE</a> 
         <!--<a routerLink="ssentences" class="w3-bar-item w3-button">Sentences</a> -->
+      </div>
+    </div>
+
+    <div class="w3-dropdown-hover  ">
+      <button class="w3-button">Tutorials</button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a routerLink="basicsan" class="w3-bar-item w3-button">Sanskrit</a>
+        <a routerLink="basictel" class="w3-bar-item w3-button">Telugu</a> 
       </div>
     </div>
 

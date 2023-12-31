@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { ObjectUnsubscribedErrorCtor } from 'rxjs/internal/util/ObjectUnsubscribedError';
-import { Observable } from 'rxjs';
+
 import { Userdata } from '../model/userdata';
 import { Enrollment } from '../model/enrollment';
 import {StudentsDataService} from 'src/app/shared/students-data.service';

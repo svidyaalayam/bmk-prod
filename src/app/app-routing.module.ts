@@ -28,6 +28,9 @@ import { SentencesComponent } from './component/sanskrit/sentences/sentences.com
 import { IgcseComponent } from './component/sanskrit/igcse/igcse.component';
 import {RamayanamComponent} from './component/others/ramayanam/ramayanam.component';
 
+import {BasicsanComponent} from './component/tutorials/basicsan/basicsan.component';
+import {BasictelComponent} from './component/tutorials/basictel/basictel.component';
+
 
 
 import { VerifyEmailComponent } from './component/auth/verify-email/verify-email.component';
@@ -59,6 +62,8 @@ const routes: Routes = [
   {path: 'numbergame', component: NumbergameComponent, canActivate: [authGuard]},
   {path: 'weekdaygame', component: WeekdaygameComponent, canActivate: [authGuard]},
   {path: 'fruitsgame', component: GamefruitsComponent, canActivate: [authGuard]},
+  {path: 'basicsan', component: BasicsanComponent, canActivate: [authGuard]},
+  {path: 'basictel', component: BasictelComponent, canActivate: [authGuard]},
   {path: 'sabdams', component: SabdamGameComponent},
   {path: 'snouns', component: NounsComponent},
   {path: 'sverbs', component: VerbsComponent},

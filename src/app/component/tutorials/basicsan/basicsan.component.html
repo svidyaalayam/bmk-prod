@@ -1,0 +1,165 @@
+
+
+
+<div class="input-group mb-3" style="margin-top: 20px;">
+    <input  type="checkbox" id="checktel" [(ngModel)]="bTel" >
+    <label for="checktel" style="padding-left: 5px; "> Telugu</label>   
+  
+    <input  type="checkbox" id="checksan" [(ngModel)]="bSan" >
+    <label for="checksan" style="padding-left: 5px; "> Sanskrit</label>   
+  
+    <input  type="checkbox" id="checktrans" [(ngModel)]="bTrans" >
+    <label for="checktrans" style="padding-left: 5px; "> Transcription</label>   
+    </div>
+          
+    <div id="stotramcontent" class="a4-sheet">
+  
+      <div class="element-container" *ngFor="let RowData of RowsData">
+  
+        <div [style.width.%]="item.width"  class="element" *ngFor="let item of RowData.items">
+          <div *ngIf="item.type==0">
+            <div *ngIf="item.textTop!=''">
+              <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getTel(item.textTop)}} </p>
+              </span>
+  
+              <span *ngIf="bSan" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getSan(item.textTop)}} </p>
+              </span>
+  
+              <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getTran(item.textTop)}} </p>
+              </span>
+  
+            </div>
+  
+  
+            <div *ngIf="bTel" >
+              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+  
+                <div *ngIf="para.ptype==0">
+                  <p>{{getTel(para.ptext)}} </p>
+                </div>
+  
+    
+                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
+                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTel(plitem)}} </p>
+                </div>
+    
+                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
+                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTel(plitem)}} </p>
+                </div>
+    
+              </div>           
+  
+            </div>
+  
+            <div *ngIf="bSan">
+  
+              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+  
+                <div *ngIf="para.ptype==0">
+                  <p>{{getSan(para.ptext)}} </p>
+                </div>
+    
+                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
+                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getSan(plitem)}} </p>
+                </div>
+    
+                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
+                  <p *ngFor="let plitem of para.plist, let i = index">* {{getSan(plitem)}} </p>
+                </div>
+    
+              </div>   
+  
+            </div>
+  
+            <div *ngIf="bTrans">
+  
+              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+  
+                <div *ngIf="para.ptype==0">
+                  <p>{{getTran(para.ptext)}} </p>
+                </div>
+  
+                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
+                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTran(plitem)}} </p>
+                </div>
+    
+                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
+                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTran(plitem)}} </p>
+                </div>
+    
+              </div>   
+  
+            </div>
+  
+            <div *ngIf="item.drawLine" class="wavy-line">
+            </div>
+  
+  
+          </div>
+  
+          <div *ngIf="item.type==1">
+            <div *ngIf="item.textTop!=''">
+              <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getTel(item.textTop)}} </p>
+              </span>
+  
+              <span *ngIf="bSan" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getSan(item.textTop)}} </p>
+              </span>
+  
+              <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getTran(item.textTop)}} </p>
+              </span>
+  
+            </div>
+            
+            <img src="{{item.imageUrl}}">   
+            <div *ngIf="item.textBtm!=''">
+              <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getTel(item.textBtm)}} </p>
+              </span>
+  
+              <span *ngIf="bSan" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getSan(item.textBtm)}} </p>
+              </span>
+  
+              <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <p>{{getTran(item.textBtm)}} </p>
+              </span>
+  
+            </div>
+          
+          </div>
+  
+          <div *ngIf="item.type==99" class="wavy-line">
+          </div>
+        
+        
+        </div>
+  
+  
+  
+      </div>
+  
+  
+  
+      <span style="font-family:NotoSansTelugu; line-height:250%;font-size: 22px;">
+        <p>कृष्ण यजुर्वेदीय तैत्तिरीय संहिता <br>
+  
+        </p></span>
+  
+  
+  
+  <span style="font-family:NotoSansTelugu; line-height:275%;font-size: 22px;">
+  <p>కృష్ణ యజుర్వేదీయ తైత్తిరీయ సంహితా <br>
+  
+  <p>ఓం శాంతిః॒ శాంతిః॒ శాంతిః॑ ॥<br>
+  </p></span>				
+       
+  
+      </div>						
+  
+  

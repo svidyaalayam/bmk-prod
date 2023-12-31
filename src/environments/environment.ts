@@ -14,8 +14,9 @@ export const environment = {
     storageBucket: 'balamukundamtelugupathasala.appspot.com',
     apiKey: 'AIzaSyCrridTHw5gCfgv57KqU312qYaInGHVvh8',
     authDomain: 'balamukundamtelugupathasala.firebaseapp.com',
+    databaseURL: "https://balamukundamtelugupathasala-default-rtdb.firebaseio.com",
     messagingSenderId: '740537296889',
-  },
+  }, 
 
   firebaseProductionebApp: {
     apiKey: "AIzaSyB1bsgI2dwHdmhlBsrZCwN5rwl3twuwoxE",

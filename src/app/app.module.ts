@@ -9,6 +9,7 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { RegisterComponent } from './component/auth/register/register.component';
 
 import { LoginComponent } from './component/auth/login/login.component';
@@ -67,6 +68,8 @@ import { ScrollHeaderComponent } from './component/others/scroll-header/scroll-h
 import { ActionsComponent } from './component/admin/actions/actions.component';
 import { RamayanamComponent } from './component/others/ramayanam/ramayanam.component';
 import { AttendanceComponent } from './component/admin/attendance/attendance.component';
+import { BasicsanComponent } from './component/tutorials/basicsan/basicsan.component';
+import { BasictelComponent } from './component/tutorials/basictel/basictel.component';
 
 @NgModule({
   declarations: [
@@ -122,13 +125,16 @@ import { AttendanceComponent } from './component/admin/attendance/attendance.com
     ActionsComponent,
     RamayanamComponent,
     AttendanceComponent,
+    BasicsanComponent,
+    BasictelComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule,
+    AppRoutingModule, 
     provideFirebaseApp(() => initializeApp(environment.firebaseProductionebApp)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),    
+    provideFirestore(() => getFirestore()), 
+    provideDatabase(() => getDatabase()),  
     FormsModule, BrowserAnimationsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
   ],

@@ -6,7 +6,146 @@ import { Injectable } from '@angular/core';
 export class EngToTelService {
 
   constructor() { }
+
   private curLang:number = 0;
+
+  getStringInTranscript(str1:string):string {
+
+    let str2: string = str1;
+    
+    str2=this.replaceAll(str2,'Mk', 'Ák');
+    str2=this.replaceAll(str2,'MK', 'ÁK');
+    str2=this.replaceAll(str2,'Mg', 'Ág');
+    str2=this.replaceAll(str2,'MG', 'ÁG');
+    str2=this.replaceAll(str2,'Mc', 'Ñc');
+    str2=this.replaceAll(str2,'MC', 'ÑC');
+    str2=this.replaceAll(str2,'Mj', 'Ñj');
+    str2=this.replaceAll(str2,'MJ', 'ÑJ');
+    str2=this.replaceAll(str2,'MT', 'NT');
+    str2=this.replaceAll(str2,'MD', 'ND');
+    str2=this.replaceAll(str2,'Mt', 'nt');
+    str2=this.replaceAll(str2,'Md', 'nd');
+    str2=this.replaceAll(str2,'Mp', 'mp');
+    str2=this.replaceAll(str2,'Mb', 'mb');
+
+    str2=this.findandReplaceChars(str2);
+
+    str2=this.replaceAll(str2, 'aa', 'A');		
+    str2=this.replaceAll(str2, 'ee', 'I');	
+    str2=this.replaceAll(str2, 'ii', 'I');	
+    str2=this.replaceAll(str2, 'uu', 'U');	
+    str2=this.replaceAll(str2, 'oo', 'U');	
+    str2=this.replaceAll(str2, 'Ru', 'F');	
+    str2=this.replaceAll(str2, 'zu', 'Z');	
+    str2=this.replaceAll(str2, 'ea', 'E');	
+    str2=this.replaceAll(str2, 'ai', 'Y');	
+    str2=this.replaceAll(str2, 'oe', 'O');	
+    str2=this.replaceAll(str2, 'ou', 'W');	
+    str2=this.replaceAll(str2, 'au', 'W');
+    str2=this.replaceAll(str2, '@h', 'Ĥ');	
+    str2=this.replaceAll(str2, 'kh', 'K');	
+    str2=this.replaceAll(str2, 'gh', 'G');	
+    str2=this.replaceAll(str2, '~m', 'Á');	
+    str2=this.replaceAll(str2, 'ch', 'c');
+    str2=this.replaceAll(str2, '~c', 'Ç');	
+    str2=this.replaceAll(str2, 'Ch', 'C');
+    str2=this.replaceAll(str2, '~j', 'Ĵ');		
+    str2=this.replaceAll(str2, '~n', 'Ñ');	
+    str2=this.replaceAll(str2, 'Th', 'Ŧ');	
+    str2=this.replaceAll(str2, 'Dh', 'Ð');	
+    str2=this.replaceAll(str2, 'th', 'ť');	
+    str2=this.replaceAll(str2, 'dh', 'đ');	
+    str2=this.replaceAll(str2, 'f', 'P');	
+    str2=this.replaceAll(str2, 'ph', 'P');
+    str2=this.replaceAll(str2, 'bh', 'B');	
+    str2=this.replaceAll(str2, 'w', 'v');	
+    str2=this.replaceAll(str2, 'sh', 'Ś');	
+    str2=this.replaceAll(str2, 'lh', 'L');	
+    str2=this.replaceAll(str2, '~r', 'Ŕ');
+    str2=this.replaceAll(str2, 'h', 'H');
+
+    str2=this.replaceAll(str2, 'A', 'ā');		
+    str2=this.replaceAll(str2, 'I', 'ī');	
+    str2=this.replaceAll(str2, 'U', 'ū');		
+    str2=this.replaceAll(str2, 'R', 'r̥');
+    str2=this.replaceAll(str2, 'F', 'r̥̄');	
+    str2=this.replaceAll(str2, 'z', 'l̥');	
+    str2=this.replaceAll(str2, 'Z', 'l̥̄');	
+    str2=this.replaceAll(str2, 'E', 'ē');	
+    str2=this.replaceAll(str2, 'Y', 'ai');	
+    str2=this.replaceAll(str2, 'O', 'ō');	
+    str2=this.replaceAll(str2, 'W', 'au');
+    str2=this.replaceAll(str2, 'M', 'ṃ');    
+    str2=this.replaceAll(str2, 'Ĥ', 'ḥ');	
+    str2=this.replaceAll(str2, 'K', 'kh');	
+    str2=this.replaceAll(str2, 'G', 'gh');	
+    str2=this.replaceAll(str2, 'Á', 'ṅ');	
+    str2=this.replaceAll(str2, 'C', 'ch');
+    str2=this.replaceAll(str2, 'J', 'jh');		
+    str2=this.replaceAll(str2, 'Ñ', 'ñ');	
+    str2=this.replaceAll(str2, 'T', 'ṭ');	
+    str2=this.replaceAll(str2, 'Ŧ', 'ṭh');	
+    str2=this.replaceAll(str2, 'D', 'ḍ');		
+    str2=this.replaceAll(str2, 'Ð', 'ḍh');
+    str2=this.replaceAll(str2, 'N', 'ṇ');
+    str2=this.replaceAll(str2, 'ť', 'th');	
+    str2=this.replaceAll(str2, 'đ', 'dh');	
+    str2=this.replaceAll(str2, 'f', 'P');	
+    str2=this.replaceAll(str2, 'P', 'ph');
+    str2=this.replaceAll(str2, 'B', 'bh');	
+    str2=this.replaceAll(str2, 'w', 'v');	
+    str2=this.replaceAll(str2, 'S', 'ś');		
+    str2=this.replaceAll(str2, 'Ś', 'ṣ');	
+    str2=this.replaceAll(str2, 'L', 'ḷ');	
+    str2=this.replaceAll(str2, 'Ŕ', 'ṟ');
+    str2=this.replaceAll(str2, 'H', 'h');
+
+    str2=this.replaceAll(str2, '^', '');
+    str2=this.replaceAll(str2, 'x', '');
+    str2=this.replaceAll(str2, 'X', '');
+    str2=this.replaceAll(str2, 'q', '');
+    str2=this.replaceAll(str2, 'Q', '');
+    str2=this.replaceAll(str2, 'V', '');   
+
+   // str2=this.replaceAll(str2, 'x', ' '+ String.fromCharCode(3073));
+   // str2=this.replaceAll(str2, 'X', ' '+ String.fromCharCode(3133));
+   // str2=this.replaceAll(str2, 'q', ' '+ String.fromCharCode(2386));
+   // str2=this.replaceAll(str2, 'Q', ' '+ String.fromCharCode(2385));
+   // str2=this.replaceAll(str2, 'V', ' '+ String.fromCharCode(7386));   
+
+
+    return str2;
+  
+}
+
+  getStringInSanskrit(str2:string):string {
+
+      this.curLang=1;
+      str2=this.replaceAll(str2,'Mk', 'Ák');
+      str2=this.replaceAll(str2,'MK', 'ÁK');
+      str2=this.replaceAll(str2,'Mg', 'Ág');
+      str2=this.replaceAll(str2,'MG', 'ÁG');
+      str2=this.replaceAll(str2,'Mc', 'Ñc');
+      str2=this.replaceAll(str2,'MC', 'ÑC');
+      str2=this.replaceAll(str2,'Mj', 'Ñj');
+      str2=this.replaceAll(str2,'MJ', 'ÑJ');
+      str2=this.replaceAll(str2,'MT', 'NT');
+      str2=this.replaceAll(str2,'MD', 'ND');
+      str2=this.replaceAll(str2,'Mt', 'nt');
+      str2=this.replaceAll(str2,'Md', 'nd');
+      str2=this.replaceAll(str2,'Mp', 'mp');
+      str2=this.replaceAll(str2,'Mb', 'mb');
+      return this.replaceAll(this.strConvertToTeluguAll(str2), String.fromCharCode(3075), 'ः');
+    
+  }
+
+  getStringInTelugu(str2:string):string {
+
+    this.curLang=0;
+
+    return this.strConvertToTeluguAll(str2);
+  
+}
 
 
   strConvertToTeluguAll(str1:string):string{
@@ -223,4 +362,3 @@ export class EngToTelService {
     return str1.split(strFind).join(strRep);
   }
 }
-

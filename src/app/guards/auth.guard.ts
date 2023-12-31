@@ -9,6 +9,8 @@ export const authGuard: CanActivateFn = (route, state) => {
  switch (state.url) {
   case '/logout':
   case '/studentdata':
+  case '/basicsan':
+  case '/basictel':
     return aService.userLogged();
 
 
