@@ -70,6 +70,7 @@ import { RamayanamComponent } from './component/others/ramayanam/ramayanam.compo
 import { AttendanceComponent } from './component/admin/attendance/attendance.component';
 import { BasicsanComponent } from './component/tutorials/basicsan/basicsan.component';
 import { BasictelComponent } from './component/tutorials/basictel/basictel.component';
+import { CreatelessonComponent } from './component/tutorials/createlesson/createlesson.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import { BasictelComponent } from './component/tutorials/basictel/basictel.compo
     AttendanceComponent,
     BasicsanComponent,
     BasictelComponent,
+    CreatelessonComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

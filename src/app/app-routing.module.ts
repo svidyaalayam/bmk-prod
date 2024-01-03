@@ -30,6 +30,7 @@ import {RamayanamComponent} from './component/others/ramayanam/ramayanam.compone
 
 import {BasicsanComponent} from './component/tutorials/basicsan/basicsan.component';
 import {BasictelComponent} from './component/tutorials/basictel/basictel.component';
+import { CreatelessonComponent } from './component/tutorials/createlesson/createlesson.component';
 
 
 
@@ -64,6 +65,7 @@ const routes: Routes = [
   {path: 'fruitsgame', component: GamefruitsComponent, canActivate: [authGuard]},
   {path: 'basicsan', component: BasicsanComponent, canActivate: [authGuard]},
   {path: 'basictel', component: BasictelComponent, canActivate: [authGuard]},
+  {path: 'createlesson', component: CreatelessonComponent},
   {path: 'sabdams', component: SabdamGameComponent},
   {path: 'snouns', component: NounsComponent},
   {path: 'sverbs', component: VerbsComponent},

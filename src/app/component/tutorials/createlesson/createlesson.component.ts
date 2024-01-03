@@ -4,11 +4,11 @@ import { EngToTelService } from '../../../shared/eng-to-tel.service';
 import { DbServiceService } from '../../../shared/db-service.service';
 
 @Component({
-  selector: 'app-basictel',
-  templateUrl: './basictel.component.html',
-  styleUrls: ['./basictel.component.css']
+  selector: 'app-createlesson',
+  templateUrl: './createlesson.component.html',
+  styleUrls: ['./createlesson.component.css']
 })
-export class BasictelComponent implements OnInit {
+export class CreatelessonComponent implements OnInit {
 
 
   constructor(private sEngToTel: EngToTelService, private db: DbServiceService) { 
@@ -69,13 +69,23 @@ export class BasictelComponent implements OnInit {
   }
 
   currentLessonCount: number = 0;
+  jsonString: string = '';
 
   incrementCounter2(i: number) {
     if(this.currentLessonCount != i || this.RowsData.length==0){
       this.currentLessonCount = i;
-      this.db.getDatabaseData(this.lessonHeaderData[this.currentCount].lessons[i].id).then(res => {this.RowsData = res});
+      this.db.getDatabaseData(this.lessonHeaderData[this.currentCount].lessons[i].id).then(res => {
+        this.RowsData = res;
+        this.jsonString = JSON.stringify(this.RowsData, null, 2);
+      });
+      
     }
     
+  }
+
+  update() {
+    this.RowsData = JSON.parse(this.jsonString);
+
   }
 
   curLitem: number = 0;

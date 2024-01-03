@@ -14,14 +14,22 @@ export class BasicsanComponent implements OnInit {
   constructor(private sEngToTel: EngToTelService, private db: DbServiceService) { 
 
    // db.saveDatabaseData();
+   //db.autoSaveDatabaseData();
+
+   //db.saveDatabaseTeluguHeaderData();
+   //db.saveDatabaseSanskritHeaderData();
    
      
      
   }
 
   ngOnInit(): void {
-    this.db.getDatabaseData().then(res => {this.RowsData = res});
+    this.db.getDatabaseData('xxx').then(res => {this.RowsData = res});
+    this.db.getDatabaseHeaderData('Telugu').then(res => {this.lessonHeaderData = res; console.log(this.lessonHeaderData);});
+
+    
   }
+  
   title = 'Lalithas 1st Project';
 
 
@@ -30,6 +38,8 @@ export class BasicsanComponent implements OnInit {
   bTel = true;
   bSan = true;
   bTrans = true;
+
+  lessonHeaderData : any[] = [];
 
 
   RowsData : any[] = [];
