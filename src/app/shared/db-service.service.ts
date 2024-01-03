@@ -181,10 +181,41 @@ export class DbServiceService {
     set(newLessonRef, this.RowsData);
   }
 
+  createNewDatabaseEntry(inRowsData: any): string {
+    console.log("Writing to Database");
+    const database = getDatabase(this.fbap);
+    const lessonsRef = ref(database, 'lessons');
+  
+    // Use push to generate a unique key
+    const newLessonRef = push(lessonsRef);
+  
+    this.RowsData.rowsData = inRowsData;
+    // Set data using the generated key
+    set(newLessonRef, this.RowsData);
+
+    return newLessonRef.key + '';
+  }
+
+  saveDatabaseWithData(inRowsData: any, lessonId: string){
+    console.log("Writing to Database");
+    const database = getDatabase(this.fbap);
+    const starCountRef = ref(database, 'lessons/'+lessonId);
+    this.RowsData.rowsData = inRowsData;
+      set(starCountRef, this.RowsData);
+  }
+
   saveDatabaseTeluguHeaderData(){
     console.log("Writing to Database");
     const database = getDatabase(this.fbap);
     const starCountRef = ref(database, 'lessons/teluguheader');
+      set(starCountRef, this.RowsHeaderDataTelugu);
+  }
+
+  saveDatabaseTeluguHeaderWithData(rowheadData:any){
+    console.log("Writing to Database");
+    const database = getDatabase(this.fbap);
+    const starCountRef = ref(database, 'lessons/teluguheader');
+    this.RowsHeaderDataTelugu.headerData = rowheadData;
       set(starCountRef, this.RowsHeaderDataTelugu);
   }
 

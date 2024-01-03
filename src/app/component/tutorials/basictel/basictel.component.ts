@@ -13,7 +13,7 @@ export class BasictelComponent implements OnInit {
 
   constructor(private sEngToTel: EngToTelService, private db: DbServiceService) { 
 
-    db.saveDatabaseData();
+   // db.saveDatabaseData();
    //db.autoSaveDatabaseData();
 
 
@@ -37,6 +37,7 @@ export class BasictelComponent implements OnInit {
   bTel = true;
   bTrans = true;
   bShowLessons = false;
+  bShowSubLessons = false;
 
   lessonHeaderData : any[] = [];
   selectedlessonHeader : any;
@@ -65,6 +66,7 @@ export class BasictelComponent implements OnInit {
       this.curLitem = 0;
     }
     this.bShowLessons = false;
+    this.bShowSubLessons = true;
     
   }
 
@@ -75,6 +77,7 @@ export class BasictelComponent implements OnInit {
       this.currentLessonCount = i;
       this.db.getDatabaseData(this.lessonHeaderData[this.currentCount].lessons[i].id).then(res => {this.RowsData = res});
     }
+    this.bShowSubLessons = false;
     
   }
 

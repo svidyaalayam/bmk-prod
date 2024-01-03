@@ -13,7 +13,7 @@ export class CreatelessonComponent implements OnInit {
 
   constructor(private sEngToTel: EngToTelService, private db: DbServiceService) { 
 
-    db.saveDatabaseData();
+   // db.saveDatabaseData();
    //db.autoSaveDatabaseData();
 
 
@@ -25,7 +25,12 @@ export class CreatelessonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     this.db.getDatabaseHeaderData('Telugu').then(res => {this.lessonHeaderData = res; console.log(this.lessonHeaderData);});
+     this.db.getDatabaseHeaderData('Telugu').then(res => {
+      console.log("Starting...");
+      this.lessonHeaderData = res; 
+      this.jsonHeaderString = JSON.stringify(this.lessonHeaderData, null, 2);
+      console.log(this.lessonHeaderData);
+    });
     
   }
   
@@ -40,6 +45,9 @@ export class CreatelessonComponent implements OnInit {
 
   lessonHeaderData : any[] = [];
   selectedlessonHeader : any;
+
+  selectedRowsId : string = '';
+
 
 
   RowsData : any[] = [];
@@ -70,11 +78,13 @@ export class CreatelessonComponent implements OnInit {
 
   currentLessonCount: number = 0;
   jsonString: string = '';
+  jsonHeaderString: string = '';
 
   incrementCounter2(i: number) {
     if(this.currentLessonCount != i || this.RowsData.length==0){
       this.currentLessonCount = i;
-      this.db.getDatabaseData(this.lessonHeaderData[this.currentCount].lessons[i].id).then(res => {
+      this.selectedRowsId = this.lessonHeaderData[this.currentCount].lessons[i].id;
+      this.db.getDatabaseData(this.selectedRowsId).then(res => {
         this.RowsData = res;
         this.jsonString = JSON.stringify(this.RowsData, null, 2);
       });
@@ -85,8 +95,32 @@ export class CreatelessonComponent implements OnInit {
 
   update() {
     this.RowsData = JSON.parse(this.jsonString);
-
   }
+
+  updateHeader() {
+    this.lessonHeaderData = JSON.parse(this.jsonHeaderString);
+  }
+
+  saveHeader() {
+    this.lessonHeaderData = JSON.parse(this.jsonHeaderString);
+    this.db.saveDatabaseTeluguHeaderWithData(this.lessonHeaderData);
+  }
+
+  updateJson() {
+    this.jsonString = JSON.stringify(this.RowsData, null, 2);
+  }
+
+  createNewData() {
+    this.selectedRowsId = this.db.createNewDatabaseEntry(this.RowsData);
+  }
+  updateRowsInDatabase() {
+    console.log('tryimg saving the rows data');
+    if(this.selectedRowsId != ''){
+      this.db.saveDatabaseWithData(this.RowsData, this.selectedRowsId);
+      console.log('saving the rows data');
+    } 
+  }
+  
 
   curLitem: number = 0;
 
