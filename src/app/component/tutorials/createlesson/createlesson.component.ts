@@ -59,14 +59,16 @@ export class CreatelessonComponent implements OnInit {
 
   RowsData : any[] = [];
   getSan(str:string): string{
-    return this.sEngToTel.getStringInSanskrit(str)
+    return this.sEngToTel.getStringInSanskrit(str);
   }
 
   getTel(str:string): string{
-    return this.sEngToTel.getStringInTelugu(str)
+    var convertedText = this.sEngToTel.getStringInTelugu(str);
+    return convertedText;
   }
   
   getTelForPara(str:string): string[]{
+    
     const strLines = str.split('\n');
 
     var telLines: string[] = [];

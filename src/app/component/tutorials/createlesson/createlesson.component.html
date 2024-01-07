@@ -9,7 +9,7 @@
     <button class="w3-bar-item w3-button btnAction w3-col l3 m3 s3" (click)="1">New</button>               
     <button class="w3-bar-item w3-button btnAction w3-col l3 m3 s3" (click)="1">Duplicate</button>                
     <button class="w3-bar-item w3-button btnAction w3-col l3 m3 s3" (click)="saveHeader()">SaveHeader</button>
-
+ 
   </div>
 
     <div *ngIf="lessonHeaderData[currentCount]" class="a4-sheet">
@@ -89,7 +89,7 @@
  
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
-                <p>{{(item.textTopEng)}} </p>
+                <p *ngIf="item.textTopEng!=''">{{(item.textTopEng)}} </p>
               </span>
             </div>
             <div style="text-align: left;">
@@ -114,15 +114,9 @@
               <div *ngIf="bTel" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <div *ngFor="let paratxt of getTelForPara(item.textBody)">
                   <br *ngIf="paratxt===''">
-                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
+                  <p *ngIf="paratxt!==''" style="white-space: pre-wrap;">{{paratxt}} </p>
                 </div>
-                            
-                <div *ngFor="let paratxt of item.textBodyEng.split()">
-                  <br *ngIf="paratxt===''">
-                  <p  *ngIf="paratxt!==''" >{{paratxt}} </p>
-                </div>                            
-                
-                <br>        
+                <br>       
             
               </div> 
             
@@ -131,12 +125,18 @@
             
                 <div *ngFor="let paratxt of getTranForPara(item.textBody)">
                   <br *ngIf="paratxt===''">
-                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
+                  <p *ngIf="paratxt!==''" style="white-space: pre-wrap;">{{paratxt}} </p>
                 </div>
                 <br>
               
               </div>         
 
+            </div>
+            <div *ngIf="item.textBodyEng" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+              <div *ngFor="let paratxt of item.textBodyEng.split()">
+                <br *ngIf="paratxt===''">
+                <p  *ngIf="paratxt!==''" style="white-space: pre-wrap;">{{paratxt}} </p>
+              </div>    
             </div>
 
             <div *ngIf="item.drawLine" class="wavy-line">
@@ -334,13 +334,9 @@
               <div *ngIf="bTel" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <div *ngFor="let paratxt of getTelForPara(item.textBody)">
                   <br *ngIf="paratxt===''">
-                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
+                  <p *ngIf="paratxt!==''" style="white-space: pre-wrap;">{{paratxt}} </p>
                 </div>
-                            
-                <div *ngFor="let paratxt of item.textBodyEng.split()">
-                  <br *ngIf="paratxt===''">
-                  <p  *ngIf="paratxt!==''" >{{paratxt}} </p>
-                </div>                            
+                                                      
                 
                 <br>        
             
@@ -351,12 +347,19 @@
             
                 <div *ngFor="let paratxt of getTranForPara(item.textBody)">
                   <br *ngIf="paratxt===''">
-                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
+                  <p *ngIf="paratxt!==''" style="white-space: pre-wrap;">{{paratxt}} </p>
                 </div>
                 <br>
               
               </div>         
 
+            </div>
+
+            <div *ngIf="item.textBodyEng" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+              <div *ngFor="let paratxt of item.textBodyEng.split()">
+                <br *ngIf="paratxt===''">
+                <p  *ngIf="paratxt!==''" style="white-space: pre-wrap;">{{paratxt}} </p>
+              </div>    
             </div>
 
             <div *ngIf="item.drawLine" class="wavy-line">
