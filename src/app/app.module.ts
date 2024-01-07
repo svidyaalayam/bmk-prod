@@ -134,6 +134,7 @@ import { CreatelessonComponent } from './component/tutorials/createlesson/create
     BrowserModule, HttpClientModule,
     AppRoutingModule, 
     provideFirebaseApp(() => initializeApp(environment.firebaseProductionebApp)),
+
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()), 
     provideDatabase(() => getDatabase()),  
@@ -147,3 +148,4 @@ export class AppModule { }
 
 //firebasePathasala01
 //firebaseProductionebApp
+//firebaseBmkSanskrit

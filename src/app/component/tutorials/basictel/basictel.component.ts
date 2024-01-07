@@ -50,11 +50,31 @@ export class BasictelComponent implements OnInit {
 
   getTel(str:string): string{
     return this.sEngToTel.getStringInTelugu(str)
-
   }
+  
+  getTelForPara(str:string): string[]{
+    const strLines = str.split('\n');
+
+    var telLines: string[] = [];
+    strLines.forEach(element => {
+      telLines.push(this.getTel(element));
+    });
+    return telLines;
+  }
+
 
   getTran(str:string): string{
     return this.sEngToTel.getStringInTranscript(str)
+  }
+
+  getTranForPara(str:string): string[]{
+    const strLines = str.split('\n');
+
+    var telLines: string[] = [];
+    strLines.forEach(element => {
+      telLines.push(this.getTran(element));
+    });
+    return telLines;
   }
 
   currentCount: number = 0;

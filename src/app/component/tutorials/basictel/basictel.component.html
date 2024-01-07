@@ -44,85 +44,59 @@
  
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
-                <p style="background-color: chartreuse;">{{(item.textTopEng)}} </p>
+                <p>{{(item.textTopEng)}} </p>
               </span>
 
-              
-  
             </div>
-
-            <br>
   
-  
-            <div [style.margin-left.px]="item.leftmargin" *ngIf="bTel" >
-              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-  
-                <div *ngIf="para.ptype==0">
-                  <p>{{getTel(para.ptext)}} </p>
+            <div *ngIf="item.textBody">
+              <div *ngIf="bTel" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <div *ngFor="let paratxt of getTelForPara(item.textBody)">
+                  <br *ngIf="paratxt===''">
+                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
                 </div>
+                            
+                <div *ngFor="let paratxt of item.textBodyEng.split()">
+                  <br *ngIf="paratxt===''">
+                  <p  *ngIf="paratxt!==''" >{{paratxt}} </p>
+                </div>                            
                 
-    
-                <div [style.margin-left]="item.leftmargin" *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTel(plitem.txt)}} </p>
+                <br>        
+            
+              </div> 
+            
+            
+              <div *ngIf="bTrans" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+            
+                <div *ngFor="let paratxt of getTranForPara(item.textBody)">
+                  <br *ngIf="paratxt===''">
+                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
                 </div>
-    
-                <div [style.margin-left]="item.leftmargin" *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTel(plitem.txt)}} </p>
-                </div>
-
                 <br>
-    
-              </div>           
-  
-            </div>
-  
-  
-            <div [style.margin-left.px]="item.leftmargin" *ngIf="bTrans">
-  
-              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-  
-                <div *ngIf="para.ptype==0">
-                  <p>{{getTran(para.ptext)}} </p>
-                  <p style="background-color: chartreuse;">{{(para.ptextEng)}} </p>
-                </div>
-  
-                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTran(plitem.txt)}} </p>
-                  <p style="background-color: chartreuse;" *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{(plitem.txtEng)}} </p>
-                </div>
-    
-                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTran(plitem.txt)}} </p>
-                  <p style="background-color: chartreuse;" *ngFor="let plitem of para.plist, let i = index">* {{(plitem.txtEng)}} </p>
-                </div>
+              
+              </div>         
 
-                <br>
-    
-              </div>   
-  
             </div>
-  
+
             <div *ngIf="item.drawLine" class="wavy-line">
             </div>
-  
-  
+
           </div>
   
           <div *ngIf="item.type==1">
             <div *ngIf="item.textTop!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-                <p>{{getTel(item.textTop)}} </p>                
+                <p>{{getTel(item.textTop)}} </p>
               </span>
   
  
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
-                <p style="background-color: chartreuse;">{{(item.textEng)}} </p>
               </span>
   
             </div>
             
-            <img src="{{item.imageUrl}}">   
+            <img [style.height.px]="item.imageHeight" src="{{item.imageUrl}}">   
             <div *ngIf="item.textBtm!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.textBtm)}} </p>
@@ -131,7 +105,6 @@
   
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textBtm)}} </p>
-                <p style="background-color: chartreuse;">{{(item.textBtmEng)}} </p>
               </span>
   
             </div>
@@ -146,20 +119,18 @@
   
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
-                <p style="background-color: chartreuse;">{{(item.textTopEng)}} </p>
               </span>  
             </div>
   
             <div *ngIf="item.slist.length > 0">
   
-              <img src="{{item.slist[curLitem].imageUrl}}"> 
+              <img [style.height.px]="item.imageHeight" src="{{item.slist[curLitem].imageUrl}}"> 
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.slist[curLitem].text)}} </p>
               </span>
   
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.slist[curLitem].text)}} </p>
-                <p style="background-color: chartreuse;">{{(item.slist[curLitem].textEng)}} </p>
               </span>
               
               <div class="w3-bar w3-light-grey w3-row" >
@@ -179,7 +150,6 @@
   
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textBtm)}} </p>
-                <p style="background-color: chartreuse;">{{(item.textBtmEng)}} </p>
               </span>
   
             </div>

@@ -28,4 +28,16 @@ export const environment = {
     appId: "1:562198730101:web:b1bb872ae0ef6764222f3c",
     measurementId: "G-13KZLT7TT2"
   },
+
+  // Your web app's Firebase configuration
+ firebaseBmkSanskrit: {
+  apiKey: "AIzaSyCegtlGQcWvs6DNqeHFIdnqLt9vGM8gkSI",
+  authDomain: "bmksanskrit.firebaseapp.com",
+  databaseURL: "https://bmksanskrit-default-rtdb.firebaseio.com",
+  projectId: "bmksanskrit",
+  storageBucket: "bmksanskrit.appspot.com",
+  messagingSenderId: "907444334585",
+  appId: "1:907444334585:web:af306c6ab9fb0df9a45728"
+ }
+
 };

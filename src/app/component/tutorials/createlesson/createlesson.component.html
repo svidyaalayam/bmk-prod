@@ -49,11 +49,38 @@
     
 
           
-    <div *ngIf="currentLessonCount>=0" id="stotramcontent" class="a4-sheet">
+    <div *ngFor="let RowData of RowsData, let rowcount = index" >
+
+      <button (click)="createNewRowAbove(rowcount)">Insert Row Above</button>
+      <button (click)="deletRowAtPosition(rowcount)">Delete this Row</button>
+      <h1>Begin of Row-{{rowcount+1}}</h1>
   
-      <div class="element-container" *ngFor="let RowData of RowsData">
+      <div *ngIf="currentLessonCount>=0" id="stotramcontent" class="a4-sheet element-container">
+        
   
-        <div [style.width.%]="item.width"  class="element" *ngFor="let item of RowData.items">
+        <div [style.width.%]="item.width"  class="element" *ngFor="let item of RowData.items, let columncount = index">
+          
+          <select [(ngModel)]="selectedColumnOption">
+            <option *ngFor="let filterOpt of filterOptions" [value]="filterOpt">{{filterOpt}}</option>
+          </select>
+          <button (click)="insertColumnBefore(rowcount, columncount)">Insert Column Left</button>
+          <button (click)="insertColumnBefore(rowcount, columncount+1)">Insert Column Right</button>
+          <div *ngIf="RowData.items.length > 1">            
+            <button (click)="deletColumnAtPosition(rowcount, columncount)">Delete this Column</button>
+
+            <div class="form-group">
+              <label>Column width:</label>
+              <input type="text" [(ngModel)]="item.width"  placeholder="Column width">
+            </div>
+          </div>
+            <h3 *ngIf="item.type==0">Column-{{columncount+1}} Paragraph</h3>
+            <h3 *ngIf="item.type==1">Column-{{columncount+1}} Image</h3>
+            <h3 *ngIf="item.type==10">Column-{{columncount+1}} Slide Images</h3>
+            <h3 *ngIf="item.type==99">Column-{{columncount+1}} End of Section</h3>
+            
+          <hr>        
+          
+          <br>
           <div *ngIf="item.type==0">
             <div *ngIf="item.textTop!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
@@ -62,123 +89,138 @@
  
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
+                <p>{{(item.textTopEng)}} </p>
               </span>
-
-              <input type="text" class="form-control" [(ngModel)]="item.textTop"  placeholder="......">
-
-              <input type="text" class="form-control" [(ngModel)]="item.textTopEng"  placeholder="......">
-
-  
             </div>
-  
-  
-            <div *ngIf="bTel" >
-              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-  
-                <div *ngIf="para.ptype==0">
-                  <p>{{getTel(para.ptext)}} </p>
-                  <input type="text" class="form-control" [(ngModel)]="para.ptext"  placeholder=".....">
-                  <input type="text" class="form-control" [(ngModel)]="para.ptextEng"  placeholder=".....">
-
+            <div style="text-align: left;">
+              <div class="form-group">
+                <label>Enter Header</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textTop"  placeholder="......">           
+              </div>
+              
+              <div class="form-group">
+                <label>Enter Header English meaning</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textTopEng"  placeholder="......">
+              </div>
+              
+              <label>Enter Textboody</label>
+              <textarea rows="16" cols="0" spellcheck="false" autocorrect="off" autocapitalize="off" [(ngModel)]="item.textBody" style="width:100%" placeholder="can enter multiple lines of text"></textarea>
+              
+              <label>Enter Textboody English meaning</label>
+              <textarea rows="16" cols="0" spellcheck="false" autocorrect="off" autocapitalize="off" [(ngModel)]="item.textBodyEng" style="width:100%" placeholder="can enter multiple lines of text"></textarea> 
+            </div>
+            
+            <div *ngIf="item.textBody">
+              <div *ngIf="bTel" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <div *ngFor="let paratxt of getTelForPara(item.textBody)">
+                  <br *ngIf="paratxt===''">
+                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
                 </div>
+                            
+                <div *ngFor="let paratxt of item.textBodyEng.split()">
+                  <br *ngIf="paratxt===''">
+                  <p  *ngIf="paratxt!==''" >{{paratxt}} </p>
+                </div>                            
                 
-  
-    
-                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTel(plitem.txt)}} </p>
-                  
+                <br>        
+            
+              </div> 
+            
+            
+              <div *ngIf="bTrans" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+            
+                <div *ngFor="let paratxt of getTranForPara(item.textBody)">
+                  <br *ngIf="paratxt===''">
+                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
                 </div>
-                <div *ngFor="let plitem of para.plist, let i = index">
-                  <input type="text" class="form-control" [(ngModel)]="para.plist[i].txt"  placeholder=".....">
-                  <input type="text" class="form-control" [(ngModel)]="para.plist[i].txtEng"  placeholder=".....">
-                </div>
-
-                
-    
-                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTel(plitem.txt)}} </p>
-                  
-                </div>
-
                 <br>
-    
-              </div>           
-  
-            </div>
-  
-  
-            <div *ngIf="bTrans">
-  
-              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-  
-                <div *ngIf="para.ptype==0">
-                  <p>{{getTran(para.ptext)}} </p>
-                </div>
-  
-                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTran(plitem.txt)}} </p>
-                </div>
-    
-                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTran(plitem.txt)}} </p>
-                </div>
+              
+              </div>         
 
-                <br>
-    
-              </div>   
-  
             </div>
-  
+
             <div *ngIf="item.drawLine" class="wavy-line">
             </div>
-  
-  
+
           </div>
   
           <div *ngIf="item.type==1">
+            <div style="text-align: left;">
+              <div class="form-group">
+                <label>Enter Header Text</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textTop"  placeholder="......">              
+              </div>
+
+              <div class="form-group">
+                <label>Enter Header Text English meaning</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textTopEng"  placeholder="......">
+
+              </div>
+            </div>
             <div *ngIf="item.textTop!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.textTop)}} </p>
-              </span>
-              <input type="text" class="form-control" [(ngModel)]="item.textTop"  placeholder="......">
-              <input type="text" class="form-control" [(ngModel)]="item.textTopEng"  placeholder="......">
-
-  
- 
+              </span>              
+              
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
               </span>
   
             </div>
             
-            <img src="{{item.imageUrl}}">   
+            <img [style.height.px]="item.imageHeight" src="{{item.imageUrl}}">   
             <input type="text" class="form-control" [(ngModel)]="item.imageUrl"  placeholder="......">
+            <div class="form-group">
+              <label>Enter Image Height</label>
+              <input type="text" class="form-control" [(ngModel)]="item.imageHeight"  placeholder="......">                            
+            </div>
 
             <div *ngIf="item.textBtm!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.textBtm)}} </p>
               </span>
-              <input type="text" class="form-control" [(ngModel)]="item.textBtm"  placeholder="......">
-              <input type="text" class="form-control" [(ngModel)]="item.textBtmEng"  placeholder="......">
+              
 
-
-  
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textBtm)}} </p>
               </span>
   
             </div>
+            <div style="text-align: left;">
+              <div class="form-group">
+                <label>Enter Bottom Text</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textBtm"  placeholder="......">                            
+              </div>
+
+              <div class="form-group">
+                <label>Enter Bottom Text English meaning</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textBtmEng"  placeholder="......">
+              </div>
+            </div>
           
           </div>
 
           <div *ngIf="item.type==10">
+            <div style="text-align: left;">
+              <div class="form-group">
+                <label>Enter Image Height</label>
+                <input type="text" class="form-control" [(ngModel)]="item.imageHeight"  placeholder="......">                            
+              </div>
+              <div class="form-group">
+                <label>Enter Header Text</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textTop"  placeholder="......">              
+              </div>
+
+              <div class="form-group">
+                <label>Enter Header Text English meaning</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textTopEng"  placeholder="......">
+              </div>
+            </div>
             <div *ngIf="item && item.textTop!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.textTop)}} </p>
               </span>  
-              <input type="text" class="form-control" [(ngModel)]="item.textTop"  placeholder="......">
-              <input type="text" class="form-control" [(ngModel)]="item.textTopEng"  placeholder="......">
-
+              
   
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
@@ -187,15 +229,25 @@
   
             <div *ngIf="item.slist.length > 0">
   
-              <img src="{{item.slist[curLitem].imageUrl}}"> 
+              <img [style.height.px]="item.imageHeight" src="{{item.slist[curLitem].imageUrl}}"> 
+              
               <input type="text" class="form-control" [(ngModel)]="item.slist[curLitem].imageUrl"  placeholder="......">
+              <div style="text-align: left;">
+                <div class="form-group">
+                  <label>Enter Slider Text</label>
+                  <input type="text" class="form-control" [(ngModel)]="item.slist[curLitem].text"  placeholder="......">              
+                </div>
+  
+                <div class="form-group">
+                  <label>Enter Text English meaning</label>
+                  <input type="text" class="form-control" [(ngModel)]="item.slist[curLitem].textEng"  placeholder="......">
 
+                </div>
+              </div>
               
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.slist[curLitem].text)}} </p>
-                <input type="text" class="form-control" [(ngModel)]="item.slist[curLitem].text"  placeholder="......">
-                <input type="text" class="form-control" [(ngModel)]="item.slist[curLitem].textEng"  placeholder="......">
-
+                
               </span>
   
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
@@ -209,35 +261,49 @@
                 <button class="w3-bar-item w3-button btnAction w3-col l3 m3 s3" (click)="curLitem = item.slist.length-1">End</button>
             
               </div>
-            </div>
+              <div class="w3-bar w3-light-grey w3-row" >
+                <button class="w3-bar-item w3-button btnAction w3-col l3 m3 s3" (click)="insertSlideBefore(item.slist, curLitem)">Add Before</button>
+                <button [disabled]="curLitem < 1" class="w3-bar-item w3-button btnAction w3-col l3 m3 s3" (click)="deleteThisSlide(item.slist, curLitem)">Delete</button> 
+                <button class="w3-bar-item w3-button btnAction w3-col l3 m3 s3" (click)="insertSlideBefore(item.slist, curLitem+1)">Add After</button>            
+              </div>
+            </div> 
+
   
             <div *ngIf="item.textBtm!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-                <p>{{getTel(item.textBtm)}} </p>
-                <input type="text" class="form-control" [(ngModel)]="item.textBtm"  placeholder="......">
-                <input type="text" class="form-control" [(ngModel)]="item.textBtmEng"  placeholder="......">
-
-              </span>
-  
+                <p>{{getTel(item.textBtm)}} </p>                
+              </span>  
   
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textBtm)}} </p>
-              </span>
-  
+              </span>  
+            </div>
+
+            <div style="text-align: left;">
+              <div class="form-group">
+                <label>Enter Bottom Text</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textBtm"  placeholder="......">                          
+              </div>
+
+              <div class="form-group">
+                <label>Enter Bottom Text English meaning</label>
+                <input type="text" class="form-control" [(ngModel)]="item.textBtmEng"  placeholder="......">
+              </div>
             </div>
           
           </div>
   
           <div *ngIf="item.type==99" class="wavy-line">
           </div>
-        
-        
+
         </div>
-  
-  
-  
-    </div>  
-  </div>
+
+      </div>  
+      <h1>End of Row-{{rowcount+1}}</h1>
+      <button (click)="createNewRowAbove(rowcount+1)">Insert Row Below</button>
+      <hr>
+      <br>
+    </div>
 
   <div>
     <div class="w3-bar w3-light-grey w3-row" >
@@ -259,60 +325,43 @@
  
               <span *ngIf="bTrans" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTran(item.textTop)}} </p>
+                <p>{{(item.textTopEng)}} </p>
               </span>
-  
-            </div>
-  
-  
-            <div *ngIf="bTel" >
-              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-  
-                <div *ngIf="para.ptype==0">
-                  <p>{{getTel(para.ptext)}} </p>
-                </div>
-  
-    
-                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTel(plitem.txt)}} </p>
-                </div>
-    
-                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTel(plitem.txt)}} </p>
-                </div>
 
-                <br>
-    
-              </div>           
-  
             </div>
   
-  
-            <div *ngIf="bTrans">
-  
-              <div *ngFor="let para of item.textBody" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
-  
-                <div *ngIf="para.ptype==0">
-                  <p>{{getTran(para.ptext)}} </p>
+            <div *ngIf="item.textBody">
+              <div *ngIf="bTel" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+                <div *ngFor="let paratxt of getTelForPara(item.textBody)">
+                  <br *ngIf="paratxt===''">
+                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
                 </div>
-  
-                <div *ngIf="para.ptype==1" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">{{i+1}}. {{getTran(para.plist[i].txt)}} </p>
+                            
+                <div *ngFor="let paratxt of item.textBodyEng.split()">
+                  <br *ngIf="paratxt===''">
+                  <p  *ngIf="paratxt!==''" >{{paratxt}} </p>
+                </div>                            
+                
+                <br>        
+            
+              </div> 
+            
+            
+              <div *ngIf="bTrans" style="text-align: justify; font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
+            
+                <div *ngFor="let paratxt of getTranForPara(item.textBody)">
+                  <br *ngIf="paratxt===''">
+                  <p *ngIf="paratxt!==''" >{{paratxt}} </p>
                 </div>
-    
-                <div *ngIf="para.ptype==2" style="text-align: justify; margin-left: 20px;">
-                  <p *ngFor="let plitem of para.plist, let i = index">* {{getTran(para.plist[i].txt)}} </p>
-                </div>
+                <br>
+              
+              </div>         
 
-                <br>
-    
-              </div>   
-  
             </div>
-  
+
             <div *ngIf="item.drawLine" class="wavy-line">
             </div>
-  
-  
+
           </div>
   
           <div *ngIf="item.type==1">
@@ -328,7 +377,7 @@
   
             </div>
             
-            <img src="{{item.imageUrl}}">   
+            <img [style.height.px]="item.imageHeight" src="{{item.imageUrl}}">   
             <div *ngIf="item.textBtm!=''">
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.textBtm)}} </p>
@@ -356,7 +405,7 @@
   
             <div *ngIf="item.slist.length > 0">
   
-              <img src="{{item.slist[curLitem].imageUrl}}"> 
+              <img [style.height.px]="item.imageHeight" src="{{item.slist[curLitem].imageUrl}}"> 
               <span *ngIf="bTel" style="font-family:NotoSansTelugu; line-height:125%;font-size: 22px;">
                 <p>{{getTel(item.slist[curLitem].text)}} </p>
               </span>
